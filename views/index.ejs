@@ -8,7 +8,9 @@
 <body class="hash-track-body">
 	<h1><%= hashtag %></h1>  
 	<div class="tweets">
-
+	<% for (t in tweets) { %>
+		<p><% tweets[t].text %></p>
+	<% } %>
 	</div>
 </body>
 </html>

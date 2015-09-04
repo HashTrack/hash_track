@@ -1,4 +1,4 @@
-var app = app || {}
+ var app = app || {}
 
 var express = require('express');
 var router = express.Router();
@@ -24,10 +24,7 @@ app.bearer_token_credentials_base64 = base64EncodeString(app.bearer_token_creden
 router.get('/:hashtag', function(req, res, next) {
 	// Execute a Twitter search for #meltdown
 	twitterSearch('#' + req.params.hashtag, app.bearer_token_credentials_base64, function(data) {
-		data.forEach(function(tweet) {
-			console.log(tweet.text.search(/#/g));
-		})
-		res.render('index', { hashtag: '#' + req.params.hashtag })
+		res.render('index', { hashtag: '#' + req.params.hashtag, tweets: data })
 	});
 });
 
