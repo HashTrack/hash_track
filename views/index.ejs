@@ -9,7 +9,7 @@
 	<h1><%= hashtag %></h1>  
 	<div class="tweets">
 	<% for (t in tweets) { %>
-		<p><% tweets[t].text %></p>
+		<p><span class="tweet"><%= tweets[t].text %></span> <span class="hashtag-list">[<%= parseHashtags(tweets[t].text).toString() %>]</span></p>
 	<% } %>
 	</div>
 </body>
