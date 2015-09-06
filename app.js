@@ -7,9 +7,13 @@ var bodyParser = require('body-parser');
 
 // launch database connections
 require('./models/db');
+// connect to the Hashtag model
+var hashtags = require('./models/hashtags');
+var user = require('./models/users');
 
-var search = require('./controllers/search');
+var api = require('./controllers/api');
 var users = require('./controllers/users');
+var index = require('./controllers/index');
 
 var app = express();
 
@@ -27,8 +31,9 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // mapping routes of the app
-app.use('/search', search);
+app.use('/api', api);
 app.use('/users', users);
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
