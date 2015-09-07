@@ -1,9 +1,41 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var bcrypt = require('bcrypt');
+var mongoose = require('mongoose');
+var Hashtag = require('../models/hashtags');
+var User = require('../models/users');
+
+// new user registrations
 
 // POST a new user to the DB
 router.post('/', function(req, res, next) {
-	
+	console.log('Attempting to create a new user...');
+	var userEmail = req.body.email_address;
+	var userPassword = req.body.password;
+
+	User.find({ email_address: userEmail }, function(userError, data) {
+		if (userError) return userError;
+		if (data.length === 0) {
+			// build an encrypted password and store user in user DB
+			bcrypt.genSalt(10, function(saltError, salt) {
+				if (saltError) return saltError;
+			    bcrypt.hash(userPassword, salt, function(hashError, hash) {
+			    	if (hashError) return hashError;
+			        // Store hash in the password field of user DB. 
+			        User.create({ email_address: userEmail, password_hash: hash }, function(error, data) {
+			        	if (error) return error;
+			        	res.json(data);
+			        });
+			    });
+			});
+		} else {
+			res.status(403).send('User already exists or bad password format');
+		}
+	});
+
+
 });
 
 module.exports = router;

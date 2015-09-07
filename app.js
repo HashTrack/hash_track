@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // mapping routes of the app
 app.use('/twitter', twitter);
-app.use('/users', users);
+app.use('/register', users);
 app.use('/', index);
 app.use('/api/hashtags', hashtags);
 

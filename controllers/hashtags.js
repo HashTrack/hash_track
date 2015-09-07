@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var Hashtag = require('../models/hashtags');
+var User = require('../models/users');
 // GET all tracked hashtags from the database
 router.get('/', function(req, res, next) {
 	console.log('Getting all tracked hashtags from the DB...');
@@ -21,6 +22,26 @@ router.get('/:id', function(req, res, next) {
 		res.json(data);
 	});
 });
+
+// GET all tracked hashtags for a specific user by objectID
+router.get('/user/:userid', function(req, res, next) {
+	console.log('Getting tracked hashtags for user with objectID: ' + req.params.userid);
+	Hashtag.find({ user: req.params.userid }, function(error, data) {
+		if (error) return error;
+		res.json(data);
+	});
+});
+
+// GET all tracked hashtags for a specific user by email address
+// router.get('/user/email/:email', function(req, res, next) {
+// 	console.log('Getting tracked hashtags for user with email address: ' + req.params.email);
+// 	Hashtag.find()
+// 	.populate('user', 'email_address')
+// 	.exec(function(error, data) {
+// 		if (error) return error;
+// 		res.json(data);
+// 	});
+// });
 
 // POST a newly tracked hashtag to the database
 router.post('/', function(req, res, next) {
