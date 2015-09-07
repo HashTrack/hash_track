@@ -70,4 +70,17 @@ twitter.parseHashtags = function(tweet) {
 	return hashtags;
 }
 
+// twitter.filter = function(data, fields) {
+// 	ret = [];
+// 	data.forEach(function(item) {
+
+// 	});
+// }
+
+twitter.geoHashTagQuery = function(hashtag, lat, lon, radius) {
+	var ret = '#' + hashtag + ' geocode:' + lat.toString() + ',' + lon.toString() + ',' + radius.toString() + 'km';
+	console.log('building a query: ' + ret);
+	return ret;
+}
+
 module.exports = twitter;
