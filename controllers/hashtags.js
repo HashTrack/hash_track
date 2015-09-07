@@ -39,11 +39,15 @@ router.get('/user/email/:email', function(req, res, next) {
 	.findOne({ email_address: req.params.email })
 	.exec(function(error, data) {
 		if (error) return error;
-		Hashtag.find({ user: data._id })
-		.exec(function(error, data) {
-			if (error) return error;
-			res.json(data);
-		});
+		if (data) {
+			Hashtag.find({ user: data._id })
+			.exec(function(error, data) {
+				if (error) return error;
+				res.json(data);
+			});
+		} else {
+			res.status(400).send('Email address not found');
+		}	
 	});	
 });
 
