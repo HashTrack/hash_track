@@ -17,6 +17,7 @@ var twitter = require('./controllers/twitter');
 var users = require('./controllers/users');
 var index = require('./controllers/index');
 var hashtags = require('./controllers/hashtags');
+var sessions = require('./controllers/sessions');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // mapping routes of the app
 app.use('/twitter', twitter);
 app.use('/register', users);
+app.use('/login', sessions);
 app.use('/', index);
 app.use('/api/hashtags', hashtags);
 

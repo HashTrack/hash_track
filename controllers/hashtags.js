@@ -33,15 +33,19 @@ router.get('/user/:userid', function(req, res, next) {
 });
 
 // GET all tracked hashtags for a specific user by email address
-// router.get('/user/email/:email', function(req, res, next) {
-// 	console.log('Getting tracked hashtags for user with email address: ' + req.params.email);
-// 	Hashtag.find()
-// 	.populate('user', 'email_address')
-// 	.exec(function(error, data) {
-// 		if (error) return error;
-// 		res.json(data);
-// 	});
-// });
+router.get('/user/email/:email', function(req, res, next) {
+	console.log('Getting tracked hashtags for user with email address: ' + req.params.email);
+	User
+	.findOne({ email_address: req.params.email })
+	.exec(function(error, data) {
+		if (error) return error;
+		Hashtag.find({ user: data._id })
+		.exec(function(error, data) {
+			if (error) return error;
+			res.json(data);
+		});
+	});	
+});
 
 // POST a newly tracked hashtag to the database
 router.post('/', function(req, res, next) {
