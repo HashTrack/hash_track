@@ -1,16 +1,20 @@
-  <div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
-      <h2 class=" hashtag">{{ info.hashtag }}</h2>
+<div class="row">
+	<div class="col-sm-4 col-sm-offset-3">
+		<span class="hashtag">{{ info.hashtag }}</span> 
     </div>
-    <div class="input-group col-sm-2 col-sm-offset-3 ">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button">View</button>
-            <button class="btn btn-primary" type="button">Track</button>
-        </span>
+    <div class="col-sm-2 col-sm-offset-1">
+    	<div class="input-group">
+	        <span class="input-group-btn">
+	            <button class="btn btn-default" type="button">View</button>
+	            <button class="btn btn-primary" type="button">Track</button>
+	        </span>
+        </div>
     </div>
   </div>
   <div class="row">
-    <p class="col-sm-3 col-sm-offset-2 users">Unique users: {{ info.users }}</p>
-    <p class="col-sm-3 tweets">Unique tweets: {{ info.tweets }}</p>
+  	<div class="col-sm-8 col-sm-offset-3">
+  		<span class="counts"><i class="fa fa-users"></i>Unique users: {{ info.users }}</span>
+  		<span class="counts"><i class="fa fa-comment"></i>Unique tweets: {{ info.tweets }}</span>
+  	</div>
   </div>
   <hr>
