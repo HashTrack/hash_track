@@ -5,33 +5,38 @@
 		<link rel="stylesheet" href="/stylesheets/style.css">
 		<link rel="stylesheet" href="/vendor/bootstrap.min.css">
 		<script src="/vendor/angular.min.js"></script>
+		<script src="/vendor/angular-route.min.js"></script>
 		<title>Hash Track</title>
 	</head>
 	<body ng-app='hashTrack'>
 		<!-- Used a controller for header to do fun login logout stuff using scoped nav bar items. -->
-		<header ng-controller='HeaderController'>
+		<header class='row' ng-controller='HeaderController'>
 			<show-header></show-header>
 		</header>
 
-
+		<!-- The whole app is happening in here -->
+		<!-- Use routes in hashTrack.js to connect to new controllers -->
+		<div ng-view></div>
 
 
 		<!-- Used a controller for footer to do fun login logout stuff using scoped nav bar items. -->
-		<footer ng-controller='FooterController'>
+		<footer class='row' ng-controller='FooterController'>
 			<show-footer></show-footer>
 		</footer>
 
 
 		<!-- Modules -->
-    <script src="js/app.js"></script>
+    <script src="js/hashTrack.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/HeaderController.js"></script>
-		<script src="js/controllers/FooterController.js"></script>
+    <script src="js/controllers/components/HeaderController.js"></script>
+		<script src="js/controllers/components/FooterController.js"></script>
+
+		<script src="js/controllers/HomeController.js"></script>
 
     <!-- Directives -->
-    <script src="js/directives/header.js"></script>
-    <script src="js/directives/footer.js"></script>
+    <script src="js/directives/components/header.js"></script>
+    <script src="js/directives/components/footer.js"></script>
 
 	</body>
 </html>

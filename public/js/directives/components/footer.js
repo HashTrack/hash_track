@@ -4,6 +4,6 @@ hashTrack.directive('showFooter', function() {
     scope: {
       info: '=',
     },
-    templateUrl: 'js/directives/footer.html'
+    templateUrl: 'js/directives/components/footer.html'
   };
 });
