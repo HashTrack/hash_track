@@ -1,21 +1,32 @@
 /* GLOBAL STYLES  */
+html,body {
+	margin: 0;
+	padding: 0;
+	height: 100%; /* needed for container min-height */
+}
 /* header */
 header {
-
+	background-color: #fff;
+	ul.nav-tabs { 
+		border: 0;
+	}
 }
 /* body */
-#site-container {
-	height: 100%;
-}
-
-#main-body {
+#site-container, .container-fluid {
 	background-image: url('/images/jumbo.jpg');
 	background-size: cover;
 	background-position: top;
-	height: auto;
+	position: relative; /* needed for footer positioning*/
+	height: auto !important; /* real browsers */
+	min-height: 100%;
+}
+
+#main-body {
+
 }
 /* footer */
 footer {
+	background-color: #fff;
 	position: absolute;
 	width: 100%;
 	bottom: 0;
