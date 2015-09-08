@@ -1,4 +1,4 @@
-app.directive('header', function() {
+hashTrack.directive('showHeader', function() {
   return {
     restrict: 'E',
     scope: {

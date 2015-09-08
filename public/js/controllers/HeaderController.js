@@ -1,1 +1,3 @@
-app.controller('HeaderController', []);
+hashTrack.controller('HeaderController', ['$scope', function($scope) {
+
+}]);

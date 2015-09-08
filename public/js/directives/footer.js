@@ -1,4 +1,4 @@
-app.directive('footer', function() {
+hashTrack.directive('showFooter', function() {
   return {
     restrict: 'E',
     scope: {
