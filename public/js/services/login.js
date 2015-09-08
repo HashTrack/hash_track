@@ -5,7 +5,7 @@ hashTrack.factory('login', ['$http', function($http) {
               return data;
             })
             .error(function(err) {
-              console.log(data);
+              console.log(err);
               return err;
             });
 }]);
