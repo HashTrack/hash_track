@@ -10,20 +10,22 @@
 	</head>
 	<body ng-app='hashTrack'>
 		<!-- Used a controller for header to do fun login logout stuff using scoped nav bar items. -->
-		<header class='row' ng-controller='HeaderController'>
-			<show-header></show-header>
-		</header>
+		<div class="containter-fluid">
+			<header class='row' ng-controller='HeaderController'>
+				<show-header></show-header>
+			</header>
 
-		<!-- The whole app is happening in here -->
-		<!-- Use routes in hashTrack.js to connect to new controllers -->
-		<div ng-view></div>
+			<!-- The whole app is happening in here -->
+			<!-- Use routes in hashTrack.js to connect to new controllers -->
+			
+			<div ng-view></div>
 
 
-		<!-- Used a controller for footer to do fun login logout stuff using scoped nav bar items. -->
-		<footer class='row' ng-controller='FooterController'>
-			<show-footer></show-footer>
-		</footer>
-
+			<!-- Used a controller for footer to do fun login logout stuff using scoped nav bar items. -->
+			<footer class='row' ng-controller='FooterController'>
+				<show-footer></show-footer>
+			</footer>
+		</div>
 
 		<!-- Modules -->
     <script src="js/hashTrack.js"></script>
