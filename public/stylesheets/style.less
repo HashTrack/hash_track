@@ -5,9 +5,6 @@ html,body {
 	height: 100%; /* needed for container min-height */
 }
 
-hr {
-	width: 66%;
-}
 /* header */
 header {
 	background-color: #fff;
@@ -43,7 +40,7 @@ footer {
 /* SEARCH STYLES */
 #search {
 	position: absolute;
-	bottom: 10rem;
+	bottom: 15rem;
 	width: 100%;
 	.panel {
 		padding-top: 3rem;
@@ -54,7 +51,7 @@ footer {
 /* LOGIN STYLES */
 #login {
 	position: absolute;
-	bottom: 10rem;
+	bottom: 15rem;
 	width: 100%;
 	.panel {
 		padding-top: 3rem;
@@ -63,26 +60,33 @@ footer {
 }
 
 /* RESULTS AND TRACK STYLES */
+section.panel {
+	margin: 0;
+}
+
 .hashtag {
 	font-weight: bold;
 	font-size: 3rem;
 	font-style: italic;
+	margin-bottom: 2rem;
 }
 
 .counts {
 	color: #727374;
-	margin: 1rem;
+	margin-right: 2rem;
 	i {
 		margin-right: 0.5rem;
 	}
 }
 
-#results {
+#results, #track {
 	position: absolute;
-	bottom: 30rem;
+	bottom: 20rem;
 	width: 100%;
+	height: 40rem;
+	overflow-y: scroll;
 	.panel {
-		padding-top: 1rem;
-		padding-bottom: 1rem;
+		padding-top: 0rem;
+		padding-bottom: 0rem;
 	}
 }
