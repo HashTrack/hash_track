@@ -19,6 +19,7 @@
   "devDependencies": {
     "bcrypt": "^0.8.5",
     "express": "^4.13.3",
+    "font-awesome": "^4.4.0",
     "mongoose": "^4.1.5",
     "nodemon": "^1.4.1",
     "querystring": "^0.2.0",
