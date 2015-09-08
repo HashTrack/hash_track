@@ -12,8 +12,8 @@
 	<body ng-app='hashTrack'>
 		<!-- Used a controller for header to do fun login logout stuff using scoped nav bar items. -->
 		<div class="containter-fluid" id="site-container">
-			<header class='row' ng-controller='HeaderController'>
-				<show-header></show-header>
+			<header ng-controller='HeaderController'>
+				<show-header class='row'></show-header>
 			</header>
 
 
@@ -24,9 +24,10 @@
 
 
 
+
 			<!-- Used a controller for footer to do fun login logout stuff using scoped nav bar items. -->
-			<footer class='row' ng-controller='FooterController'>
-				<show-footer></show-footer>
+			<footer ng-controller='FooterController'>
+				<show-footer class='row'></show-footer>
 			</footer>
 		</div>
 
