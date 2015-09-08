@@ -7,6 +7,15 @@ hashTrack.config(function($routeProvider) {
   }).when('/login', {
     	controller: 'LoginController',
     	templateUrl: 'views/Login.html'
+  }).when('/results', {
+    	controller: 'ResultsController',
+    	templateUrl: 'views/results.html'
+  }).when('/track', {
+    	controller: 'TrackController',
+    	templateUrl: 'views/track.html'
+  }).when('/tweets', {
+    	controller: 'TweetsController',
+    	templateUrl: 'views/tweets.html'
   }).otherwise({
     redirectTo: '/'
   });
