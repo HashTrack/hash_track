@@ -1,1 +1,11 @@
-<show-results></show-results>
+<div id="results">
+  <section class="panel panel-default">
+    <article class="panel-body">
+
+      <div ng-repeat="app in apps">
+        <show-results info="app"></show-results>
+      </div>
+
+    </article>
+  </section>
+</div>

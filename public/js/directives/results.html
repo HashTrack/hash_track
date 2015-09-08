@@ -1,11 +1,10 @@
-<div id="results">
-  <section class="panel panel-default">
-    <article class="panel-body">
-
-
-	populate me!
-
-
-    </article>
-  </section>
-</div>
+  <div class="row">
+    <h3 class=" col-sm-5 col-sm-offset-1 hashtag">{{ info.hashtag }}</h3>
+    <a class="col-sm-2 col-sm-offset-2" href="#"><button type="button" name="button">View</button></a>
+    <a class="col-sm-2" href="#"><button type="button" name="button">Track</button></a>
+  </div>
+  <div class="row">
+    <p class="col-sm-3 users">Unique users: {{ info.users }}</p>
+    <p class="col-sm-3 tweets">Unique tweets: {{ info.tweets }}</p>
+  </div>
+  <hr>
