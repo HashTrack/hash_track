@@ -9,7 +9,7 @@ passport.use(new LocalStrategy({
  	function(username, password, done) {
  		User.findOne({ email_address: username }, function(error, user) {
  			if (error) return done(error);
- 			if ((!user) || (!user.validatePassword(password))) {
+ 			if ((!user) || (!user.validatePassword(password, user.password_hash))) {
  				return done(null, false, {
  					message: 'Email address and/or password are missing or incorrect'
  				});

@@ -12,7 +12,7 @@ UserSchema.methods.setPassword = function(password) {
 	// build an encrypted password and store user in user DB
 	bcrypt.genSalt(10, function(error, salt) {
 		if (error) return error;
-		bcrypt.hash(userPassword, salt, function(error, hash) {
+		bcrypt.hash(password, salt, function(error, hash) {
 			if (error) return error;
 			// Store hash in the password field of user DB.
 			this.password_hash = hash; 
@@ -20,8 +20,8 @@ UserSchema.methods.setPassword = function(password) {
 	});
 }
 
-UserSchema.methods.validatePassword = function(password) {
-	bcrypt.compare(req.body.password, data.password_hash, function(error, auth) {
+UserSchema.methods.validatePassword = function(password, hash) {
+	bcrypt.compare(password, hash, function(error, auth) {
 		if (error) return error;
 		return auth;
 	});

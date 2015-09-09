@@ -25,8 +25,10 @@ router.post('/', function(req, res, next) {
 		} 
 		if (user) {
 			token = user.generateJwt();
+			console.log(token);
+			sendJSONresponse(res, 200, {"token": token});
 		}
-	})
+	})(req, res);
 });
 
 var sendJSONresponse = function(res, status, content) {
