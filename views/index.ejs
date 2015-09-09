@@ -11,27 +11,24 @@
 		<script src="/vendor/angular-route.min.js"></script>
 		<title>Hash#Track</title>
 	</head>
+
 	<body ng-app='hashTrack'>
-		<!-- Used a controller for header to do fun login logout stuff using scoped nav bar items. -->
 		<div class="containter-fluid" id="site-container">
+
 			<header ng-controller='HeaderController'>
 				<show-header class='row'></show-header>
 			</header>
-
 
 			<!-- The whole app is happening in here -->
 			<main id='main-body'>
 				<div ng-view></div>
 			</main>
 
-
-
-
-			<!-- Used a controller for footer to do fun login logout stuff using scoped nav bar items. -->
 			<footer ng-controller='FooterController'>
 				<show-footer class='row'></show-footer>
 			</footer>
 		</div>
+	</body>
 
 		<!-- Modules -->
     <script src="js/hashTrack.js"></script>
@@ -64,6 +61,7 @@
 
 		<!-- Services -->
 		<script src="js/common/services/login.service.js"></script>
+		<script src="js/common/services/results.service.js"></script>
 
-	</body>
+
 </html>

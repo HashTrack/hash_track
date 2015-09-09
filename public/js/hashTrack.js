@@ -3,19 +3,19 @@ var hashTrack = angular.module('hashTrack', ['ngRoute']);
 hashTrack.config(function($routeProvider) {
 	$routeProvider.when('/', {
     	controller: 'SearchController',
-    	templateUrl: 'views/search.html'
+    	templateUrl: 'js/search/search.view.html'
   }).when('/login', {
     	controller: 'LoginController',
-    	templateUrl: 'views/Login.html'
+    	templateUrl: 'js/login/Login.view.html'
   }).when('/results', {
     	controller: 'ResultsController',
-    	templateUrl: 'views/results.html'
+    	templateUrl: 'js/results/results.view.html'
   }).when('/track', {
     	controller: 'TrackController',
-    	templateUrl: 'views/track.html'
+    	templateUrl: 'js/track/track.view.html'
   }).when('/tweets', {
     	controller: 'TweetsController',
-    	templateUrl: 'views/tweets.html'
+    	templateUrl: 'js/track/tweets.view.html'
   }).otherwise({
     redirectTo: '/'
   });
