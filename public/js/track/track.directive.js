@@ -4,6 +4,6 @@ hashTrack.directive('showTrack', function() {
     scope: {
       info: '=',
     },
-    templateUrl: 'js/directives/track.html'
+    templateUrl: 'js/track/track.template.html'
   };
 });

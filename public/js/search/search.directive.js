@@ -4,6 +4,6 @@ hashTrack.directive('showSearch', function() {
     scope: {
       info: '=',
     },
-    templateUrl: 'js/directives/search.html'
+    templateUrl: 'js/search/search.template.html'
   };
 });
