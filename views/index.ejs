@@ -11,27 +11,24 @@
 		<script src="/vendor/angular-route.min.js"></script>
 		<title>Hash#Track</title>
 	</head>
+
 	<body ng-app='hashTrack'>
-		<!-- Used a controller for header to do fun login logout stuff using scoped nav bar items. -->
 		<div class="containter-fluid" id="site-container">
+
 			<header ng-controller='HeaderController'>
 				<show-header class='row'></show-header>
 			</header>
-
 
 			<!-- The whole app is happening in here -->
 			<main id='main-body'>
 				<div ng-view></div>
 			</main>
 
-
-
-
-			<!-- Used a controller for footer to do fun login logout stuff using scoped nav bar items. -->
 			<footer ng-controller='FooterController'>
 				<show-footer class='row'></show-footer>
 			</footer>
 		</div>
+	</body>
 
 		<!-- Modules -->
     <script src="js/hashTrack.js"></script>
@@ -50,25 +47,21 @@
 		<script src="js/login/login.controller.js"></script>
 		<script src="js/login/login.directive.js"></script>
 
-	  <!-- Controllers -->
+		<!-- Results -->
+		<script src="js/results/results.controller.js"></script>
+		<script src="js/results/results.directive.js"></script>
 
-		<script src="js/controllers/ResultsController.js"></script>
-		<script src="js/controllers/TrackController.js"></script>
-		<script src="js/controllers/TweetsController.js"></script>
+		<!-- Track -->
+		<script src="js/track/track.controller.js"></script>
+		<script src="js/track/track.directive.js"></script>
 
-    <!-- Directives -->
-
-
-
-
-		<script src="js/directives/results.js"></script>
-		<script src="js/directives/track.js"></script>
-		<script src="js/directives/tweets.js"></script>
+		<!-- Tweets -->
+		<script src="js/tweets/tweets.controller.js"></script>
+		<script src="js/tweets/tweets.directive.js"></script>
 
 		<!-- Services -->
-		<script src="js/services/login.js">
+		<script src="js/common/services/login.service.js"></script>
+		<script src="js/common/services/results.service.js"></script>
 
-		</script>
 
-	</body>
 </html>

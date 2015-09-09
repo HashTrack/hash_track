@@ -1,4 +1,4 @@
-hashTrack.controller('ResultsController', ['$scope', function($scope) {
+hashTrack.controller('ResultsController', ['$scope', 'results', function($scope, results) {
   $scope.apps = [{
   hashtag: '#pizza',
   users: 14,
