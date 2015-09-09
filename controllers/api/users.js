@@ -2,14 +2,13 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var cors = require('cors');
 var bcrypt = require('bcrypt');
+var passport = require('passport');
 var mongoose = require('mongoose');
 var Hashtag = require('../../models/hashtags');
 var User = require('../../models/users');
 
 // new user registrations
-
 // POST a new user to the DB
 router.post('/', function(req, res, next) {
 	console.log('Registering user');
