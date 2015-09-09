@@ -1,3 +1,4 @@
+require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,11 +15,11 @@ require('./models/hashtags');
 require('./models/users');
 
 // connect controllers
-var twitter = require('./controllers/twitter');
-var users = require('./controllers/users');
+var twitter = require('./controllers/api/twitter');
+var users = require('./controllers/api/users');
 var index = require('./controllers/index');
-var hashtags = require('./controllers/hashtags');
-var sessions = require('./controllers/sessions');
+var hashtags = require('./controllers/api/hashtags');
+var sessions = require('./controllers/api/sessions');
 
 var app = express();
 
@@ -37,7 +38,7 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // mapping routes of the app
-app.use('/twitter', twitter);
+app.use('/api/twitter', twitter);
 app.use('/register', users);
 app.use('/login', sessions);
 app.use('/', index);

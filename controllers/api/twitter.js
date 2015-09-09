@@ -1,5 +1,5 @@
 var express = require('express');
-var twitter = require('../twitter');
+var twitter = require('../../twitter');
 var router = express.Router();
 
 /* GET Twitter Standard Search */

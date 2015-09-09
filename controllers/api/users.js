@@ -5,8 +5,8 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
-var Hashtag = require('../models/hashtags');
-var User = require('../models/users');
+var Hashtag = require('../../models/hashtags');
+var User = require('../../models/users');
 
 // new user registrations
 
