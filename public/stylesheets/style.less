@@ -3,15 +3,30 @@ html,body {
 	margin: 0;
 	padding: 0;
 	height: 100%; /* needed for container min-height */
+	font-family: 'Work Sans', sans-serif;
+}
+
+.btn {
+	text-transform: uppercase;
 }
 
 /* header */
 header {
+	position: fixed;
+	z-index: 3;
+	width: 100%;
 	background-color: #fff;
+	box-shadow: 0 1px 4px #adadad;
 	ul.nav-tabs {
 		border: 0;
 	}
 }
+
+nav a {
+	text-transform: uppercase;
+	font-size: 1.6rem;
+}
+
 /* body */
 #site-container, .container-fluid {
 	background-image: url('/images/jumbo.jpg');
@@ -25,7 +40,9 @@ header {
 /* footer */
 footer {
 	background-color: #fff;
-	position: absolute;
+	box-shadow: 1px 0 4px #adadad;
+	position: fixed;
+	z-index: 2;
 	width: 100%;
 	bottom: 0;
 }
@@ -33,29 +50,82 @@ footer {
 .footer-social {
 	text-align: right;
 	i {
-		font-size: 3rem;
+		font-size: 4rem;
+		color: rgb(182, 212, 231);
+		margin-right: 1rem;
+		@media (max-width: 768px) {
+			font-size: 3rem;
+			margin-right: 0.3rem;
+		}
 	}
 }
 
 /* SEARCH STYLES */
 #search {
 	position: absolute;
-	bottom: 15rem;
+	bottom: 30rem;
 	width: 100%;
 	.panel {
 		padding-top: 3rem;
 		padding-bottom: 3rem;
+	}
+	input {
+		font-size: 4rem;
+		font-weight: 100;
+		height: 6rem;
+	}
+	span button {
+		height: 6rem;
+		font-size: 3rem;
 	}
 }
 
 /* LOGIN STYLES */
 #login {
 	position: absolute;
-	bottom: 15rem;
+	bottom: 30rem;
 	width: 100%;
 	.panel {
 		padding-top: 3rem;
 		padding-bottom: 3rem;
+		input, select {
+			height: 6rem;
+			font-size: 4rem;
+			font-weight: 100;
+			width: 25rem;
+			@media (max-width: 1085px) {
+				width: 100%;
+			}
+		}
+		select {
+			width: 20rem;
+			@media (max-width: 1085px) {
+				width: 100%;
+			}
+		}
+		button {
+			height: 6rem;
+			font-size: 3rem;
+			font-weight: 100;
+			text-transform: uppercase;
+
+		}
+	}
+	#login-btn {
+		@media (max-width: 768px) {
+			width: 100%;
+			margin-top: 1rem;
+		}
+	}
+	.form-group {
+		@media (max-width: 1085px) {
+			width: 100%;
+		}
+		input {
+			@media (max-width: 1085px) {
+				margin-bottom: 2rem;
+			}			
+		}
 	}
 }
 
@@ -65,26 +135,36 @@ section.panel {
 }
 
 .hashtag {
-	font-weight: bold;
+	font-weight: 300;
 	font-size: 3rem;
-	font-style: italic;
 	margin-bottom: 2rem;
+	@media (max-width: 768px) {
+		font-size: 2rem;
+	}
 }
 
 .counts {
-	color: #727374;
+	color: #949697;
+	display: inline-block;
 	margin-right: 2rem;
+	margin-top: 0.7rem;
+	font-size: 1.4rem;
 	i {
 		margin-right: 0.5rem;
 	}
 }
 
 #results, #track {
-	position: absolute;
-	bottom: 20rem;
+	position: relative;
+	top: 12rem;
 	width: 100%;
-	height: 40rem;
+	max-height: 50rem;
 	overflow-y: scroll;
+	@media (max-width: 768px) {
+		height: 5rem;
+		top: 0rem;
+		overflow-y: visible;
+	}
 	.panel {
 		padding-top: 0rem;
 		padding-bottom: 0rem;
