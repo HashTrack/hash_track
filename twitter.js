@@ -10,8 +10,8 @@ twitter.base64EncodeString = function(s) {
 
 twitter.authToken = function() {
 	//twitter api keys
-	twitter.consumer_key = 'eaGXlxn3LwlQCjsF4Yyh9Ns7e';
-	twitter.consumer_secret = '19fRDCso6Xq6GZjgzfRrxzRzcS33YmkUaXBXA14xueQegfyjB0';	
+	twitter.consumer_key = process.env.TWITTER_KEY;
+	twitter.consumer_secret = process.env.TWITTER_SECRET;
 
 	//URI encode the strings
 	twitter.consumer_key_encoded = encodeURIComponent(twitter.consumer_key);

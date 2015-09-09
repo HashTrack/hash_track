@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 var UserSchema = new mongoose.Schema({
 	email_address: { type: String, unique: true, required: true }
@@ -20,6 +21,16 @@ UserSchema.methods.validatePassword = function(password) {
 	bcrypt.compare(req.body.password, data.password_hash, function(error, auth) {
 		if (error) return error;
 		return auth;
+}
+
+UserSchema.methods.generateJwt = function() {
+	var expiry = new Date();
+	expiry.setDate(expiry.getDate() + 7);
+	return jwt.sign({
+		_id: this._id,
+		email_address: this.email_address,
+		exp: parseInt(expiry.getTime() / 1000)
+	}, process.env.JWT_SECRET);
 }
 
 module.exports = mongoose.model('User', UserSchema);
