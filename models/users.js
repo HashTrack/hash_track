@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
 	created_at: { type: Date, "default": new Date() }
 });
 
-UserSchema.methods.setPassword = function(password, callback) {
+UserSchema.methods.setPassword = function(password) {
 	// build an encrypted password and store user in user DB
 	bcrypt.genSalt(10, function(error, salt) {
 		if (error) return error;
@@ -20,7 +20,7 @@ UserSchema.methods.setPassword = function(password, callback) {
 	});
 }
 
-UserSchema.methods.validatePassword = function(password, callback) {
+UserSchema.methods.validatePassword = function(password) {
 	bcrypt.compare(req.body.password, data.password_hash, function(error, auth) {
 		if (error) return error;
 		return auth;
