@@ -38,7 +38,7 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // mapping routes of the app
-app.use('/twitter', twitter);
+app.use('/api/twitter', twitter);
 app.use('/register', users);
 app.use('/login', sessions);
 app.use('/', index);

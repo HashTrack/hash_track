@@ -4,8 +4,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
-var Hashtag = require('../models/hashtags');
-var User = require('../models/users');
+var Hashtag = require('../../models/hashtags');
+var User = require('../../models/users');
 // GET all tracked hashtags from the database
 router.get('/', function(req, res, next) {
 	console.log('Getting all tracked hashtags from the DB...');
