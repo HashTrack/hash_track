@@ -6,6 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var passport = require('passport'); 
+
 
 // launch database connections
 require('./models/db');
@@ -13,6 +15,8 @@ require('./models/db');
 require('./models/hashtags');
 // connect to the  user model
 require('./models/users');
+//require the passport config file
+require('./controllers/api/config/passport'); 
 
 // connect controllers
 var twitter = require('./controllers/api/twitter');
@@ -36,6 +40,9 @@ app.use(cookieParser());
 app.use(cors());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// initialize passport
+app.use(passport.initialize()); 
 
 // mapping routes of the app
 app.use('/api/twitter', twitter);
