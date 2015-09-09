@@ -4,6 +4,6 @@ hashTrack.directive('showLogin', function() {
     scope: {
       info: '=',
     },
-    templateUrl: 'js/directives/login.html'
+    templateUrl: 'js/login/login.directive.html'
   };
 });

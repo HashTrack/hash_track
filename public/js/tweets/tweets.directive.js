@@ -4,6 +4,6 @@ hashTrack.directive('showTweets', function() {
     scope: {
       info: '=',
     },
-    templateUrl: 'js/directives/tweets.html'
+    templateUrl: 'js/tweets/tweets.template.html'
   };
 });

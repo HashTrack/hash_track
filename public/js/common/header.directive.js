@@ -4,6 +4,6 @@ hashTrack.directive('showHeader', function() {
     scope: {
       info: '=',
     },
-    templateUrl: 'js/directives/components/header.html'
+    templateUrl: 'js/common/header.template.html'
   };
 });
