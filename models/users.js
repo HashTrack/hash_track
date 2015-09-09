@@ -3,12 +3,12 @@ var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
 var UserSchema = new mongoose.Schema({
-	email_address: { type: String, unique: true, required: true }
+	email_address: { type: String, unique: true, required: true },
 	password_hash: String,
 	created_at: { type: Date, "default": new Date() }
 });
 
-UserSchema.methods.setPassword = function(password) {
+UserSchema.methods.setPassword = function(password, callback) {
 	// build an encrypted password and store user in user DB
 	bcrypt.genSalt(10, function(error, salt) {
 		if (error) return error;
@@ -16,14 +16,18 @@ UserSchema.methods.setPassword = function(password) {
 			if (error) return error;
 			// Store hash in the password field of user DB.
 			this.password_hash = hash; 
+		});
+	});
 }
-UserSchema.methods.validatePassword = function(password) {
+
+UserSchema.methods.validatePassword = function(password, callback) {
 	bcrypt.compare(req.body.password, data.password_hash, function(error, auth) {
 		if (error) return error;
 		return auth;
+	});
 }
 
-UserSchema.methods.generateJwt = function() {
+UserSchema.methods.generateJwt = function(callback) {
 	var expiry = new Date();
 	expiry.setDate(expiry.getDate() + 7);
 	return jwt.sign({

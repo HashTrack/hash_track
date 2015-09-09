@@ -15,11 +15,11 @@ require('./models/hashtags');
 require('./models/users');
 
 // connect controllers
-var twitter = require('./controllers/twitter');
-var users = require('./controllers/users');
+var twitter = require('./controllers/api/twitter');
+var users = require('./controllers/api/users');
 var index = require('./controllers/index');
-var hashtags = require('./controllers/hashtags');
-var sessions = require('./controllers/sessions');
+var hashtags = require('./controllers/api/hashtags');
+var sessions = require('./controllers/api/sessions');
 
 var app = express();
 
