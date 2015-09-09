@@ -27,7 +27,7 @@ UserSchema.methods.validatePassword = function(password) {
 	});
 }
 
-UserSchema.methods.generateJwt = function(callback) {
+UserSchema.methods.generateJwt = function() {
 	var expiry = new Date();
 	expiry.setDate(expiry.getDate() + 7);
 	return jwt.sign({
