@@ -8,20 +8,24 @@ var UserSchema = new mongoose.Schema({
 	created_at: { type: Date, "default": new Date() }
 });
 
-UserSchema.methods.setPassword = function(password) {
+UserSchema.methods.setPassword = function(password, callback) {
+	var that = this;
 	// build an encrypted password and store user in user DB
 	bcrypt.genSalt(10, function(error, salt) {
 		if (error) return error;
 		bcrypt.hash(password, salt, function(error, hash) {
 			if (error) return error;
 			// Store hash in the password field of user DB.
-			this.password_hash = hash; 
+			console.log(hash);
+			that.password_hash = hash;
+			callback(); 
 		});
 	});
 }
 
 UserSchema.methods.validatePassword = function(password, hash) {
 	bcrypt.compare(password, hash, function(error, auth) {
+		console.log('is he auth\'d? ' + auth)
 		if (error) return error;
 		return auth;
 	});

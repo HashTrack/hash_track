@@ -10,7 +10,7 @@ var User = require('../../models/users');
 
 // POST an authentication request for an email / password confirmation
 router.post('/', function(req, res, next) {
-	console.log('retrieving credentials from the POST...');
+	console.log('beginning of login route...');
 	if (!req.body.email_address || !req.body.password) {
 		sendJSONresponse(res, 400, {
 			message: 'All fields are required'
@@ -19,6 +19,8 @@ router.post('/', function(req, res, next) {
 	}
 	passport.authenticate('local', function(error, user, info) {
 		var token;
+		console.log('passport authenticate callback');
+		console.log(user);
 		if (error) {
 			sendJSONresponse(res, 401, error);
 			return;
@@ -27,6 +29,8 @@ router.post('/', function(req, res, next) {
 			token = user.generateJwt();
 			console.log(token);
 			sendJSONresponse(res, 200, {"token": token});
+		} else {
+			sendJSONresponse(res, 401, info);
 		}
 	})(req, res);
 });
