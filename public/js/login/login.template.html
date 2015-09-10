@@ -1,9 +1,9 @@
-<div id="login">
+<div ng-controller='LoginController' id="login">
   <section class="panel panel-default">
     <article class="panel-body">
         <div class="row">
           <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-2">
-          <form ng-submit="submitAuth(email)" class="form-inline">
+          <form ng-submit="submitAuth()" class="form-inline">
             <div class="form-group">
               <label class="sr-only" for="login-email">Email address</label>
               <input type="email" class="form-control" id="login-email" name='email' ng-model="email" placeholder="Email">
