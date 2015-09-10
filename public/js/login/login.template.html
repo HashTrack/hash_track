@@ -3,21 +3,22 @@
     <article class="panel-body">
         <div class="row">
           <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-2">
-          <form class="form-inline">
+          <form ng-submit="submitAuth(email, password, authType)" class="form-inline">
             <div class="form-group">
               <label class="sr-only" for="login-email">Email address</label>
-              <input type="email" class="form-control" id="login-email" placeholder="Email">
+              <input type="email" class="form-control" id="login-email" ng-model="email" placeholder="Email">
             </div>
             <div class="form-group">
               <label class="sr-only" for="login-password">Password</label>
-              <input type="password" class="form-control" id="login-password" placeholder="Password">
+              <input type="password" class="form-control" id="login-password" ng-model="password" placeholder="Password">
             </div>
-            <select class="form-control">
+            <select class="form-control" ng-model="authType">
               <option value="login">Login</option>
               <option value="register">Register</option>
             </select>
             <button id="login-btn" type="submit" class="btn btn-primary">Go</button>
           </form>
+          <div role="alert" ng-show="formError" class="alert alert-danger">{{ formError }}</div>
           </div>
         </div>
       </form>
