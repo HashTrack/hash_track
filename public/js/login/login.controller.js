@@ -1,4 +1,4 @@
-hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', function($scope, authentication, $http) {
+hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', '$location', function($scope, authentication, $http, $location) {
 	// initialize credentials
 	$scope.credentials = {
 		email_address: "",
@@ -8,10 +8,12 @@ hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', fu
 	// initialize auth type
 	$scope.authType = "";
 
+	//define the return page
+	$scope.returnPage = $location.search().page || '/track';
+
 	$scope.submitAuth = function(email, password, authType) {
 		console.log('Login button clicked...');
 		console.log('Email address: ' + email);
-		console.log('Password: ' + password);
 		console.log('Auth type: ' + authType);
 		$scope.credentials.email_address = email;
 		$scope.credentials.password = password;
@@ -37,7 +39,9 @@ hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', fu
 					$scope.formError = error.message;
 				})
 				.then(function() {
-					console.log('login successful!');
+					console.log('login successful as user: ' + $scope.credentials.email_address);
+					$location.search('page', null);
+					$location.path($scope.returnPage);
 				});
 				break;
 			case 'register':
@@ -47,7 +51,9 @@ hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', fu
 					$scope.formError = error;
 				})
 				.then(function() {
-
+					console.log('successful registration as user: ' + $scope.credentials.email_address);
+					$location.search('page', null);
+					$location.path($scope.returnPage);
 				});
 				break;
 			default:
