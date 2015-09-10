@@ -23,11 +23,11 @@ UserSchema.methods.setPassword = function(password, callback) {
 	});
 }
 
-UserSchema.methods.validatePassword = function(password, hash) {
+UserSchema.methods.validatePassword = function(password, hash, callback) {
 	bcrypt.compare(password, hash, function(error, auth) {
 		console.log('is he auth\'d? ' + auth)
 		if (error) return error;
-		return auth;
+		callback(auth);
 	});
 }
 

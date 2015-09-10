@@ -17,12 +17,14 @@ passport.use(new LocalStrategy({
  					message: 'Email address and/or password are missing or incorrect'
  				});
  			};
- 			if (!user.validatePassword(password, user.password_hash)) {
- 				return done(null, false, {
- 					message: 'Email address and/or password are missing or incorrect'
- 				}); 				
- 			}
- 			return done(null, user);
+ 			user.validatePassword(password, user.password_hash, function(auth) {
+ 				if (!auth) {
+	 				return done(null, false, {
+	 					message: 'Email address and/or password are missing or incorrect'
+	 				});  					
+	 			}
+	 			return done(null, user);
+ 			});
  		});
  	}
 )); 
