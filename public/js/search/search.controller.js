@@ -1,11 +1,10 @@
-hashTrack.controller('SearchController', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
+hashTrack.controller('SearchController', ['$scope', '$http', '$location', function($scope, $http, $location) {
   $scope.searchHashtag = function(hashtag) {
     $scope.hashtag = hashtag;
-    console.log($routeParams);
-    $scope.newURL = ('/results/' + $routeParams.hashtag)
+    $scope.newURL = ('/results/' + $scope.hashtag)
     console.log($scope.newURL);
-
     console.log('This thing needs to route corectly and its searching for hashtag: #' + hashtag);
+    $location.path($scope.newURL);
   };
-    var path = $location.path($scope.newURL);
+
 }]);
