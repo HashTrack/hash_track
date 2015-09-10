@@ -1,4 +1,4 @@
-hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', function($scope, searchNoGeo) {
+hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParams', function($scope, searchNoGeo,$routeParams) {
   $scope.apps = [{
     hashtag: '#pizza',
     users: 14,
@@ -12,8 +12,9 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', function($sc
   ];
 
   $scope.getDataNoGeo = function () {
+    console.log($routeParams);
     $scope.hashtagData = {};
-    searchNoGeo.getTweets('pizza')
+    searchNoGeo.getTweets($routeParams.hashtag)
       .success(function(data) {
         $scope.hashtagData = data
         console.log($scope.hashtagData);
