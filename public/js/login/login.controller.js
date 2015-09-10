@@ -1,3 +1,3 @@
-hashTrack.controller('LoginController', ['$scope', 'login',  function($scope, login) {
-  
+hashTrack.controller('LoginController', ['$scope',  function($scope, login) {
+
 }]);
