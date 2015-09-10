@@ -48,7 +48,7 @@ hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', '$
 				authentication
 				.register($scope.credentials)
 				.error(function(error) {
-					$scope.formError = error;
+					$scope.formError = error.message;
 				})
 				.then(function() {
 					console.log('successful registration as user: ' + $scope.credentials.email_address);
