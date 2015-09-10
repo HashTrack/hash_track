@@ -1,13 +1,13 @@
 var hashTrack = angular.module('hashTrack', ['ngRoute']);
 
-hashTrack.config(function($routeProvider) {	
+hashTrack.config(function($routeProvider) {
 	$routeProvider.when('/', {
     	controller: 'SearchController',
     	templateUrl: 'js/search/search.view.html'
   }).when('/login', {
     	controller: 'LoginController',
     	templateUrl: 'js/login/login.view.html'
-  }).when('/results', {
+  }).when('/results/:hashtag', {
     	controller: 'ResultsController',
     	templateUrl: 'js/results/results.view.html'
   }).when('/track', {
