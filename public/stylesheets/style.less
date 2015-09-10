@@ -85,6 +85,9 @@ footer {
 	position: absolute;
 	bottom: 30rem;
 	width: 100%;
+	@media (max-width: 660px) {
+		bottom: 5rem;	
+	}
 	.panel {
 		padding-top: 3rem;
 		padding-bottom: 3rem;
@@ -112,7 +115,7 @@ footer {
 		}
 	}
 	#login-btn {
-		@media (max-width: 768px) {
+		@media (max-width: 1085px) {
 			width: 100%;
 			margin-top: 1rem;
 		}
@@ -127,6 +130,10 @@ footer {
 			}			
 		}
 	}
+}
+
+.login-error {
+	margin-top: 1rem;
 }
 
 /* RESULTS AND TRACK STYLES */
