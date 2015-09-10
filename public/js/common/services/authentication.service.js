@@ -1,10 +1,11 @@
 (function() {
+	console.log('authentication service active...');
 	angular
 	.module('hashTrack')
 	.service('authentication', authentication);
 
-	authentication.$inject = ['$window'];
-	function authentication ($window) {
+	authentication.$inject = ['$window', '$http'];
+	function authentication ($window, $http) {
 		var saveToken = function (token) {
 			$window.localStorage['hashTrack-token'] = token;
 		};
