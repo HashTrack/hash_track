@@ -6,7 +6,7 @@ hashTrack.config(function($routeProvider) {
     	templateUrl: 'js/search/search.view.html'
   }).when('/login', {
     	controller: 'LoginController',
-    	templateUrl: 'js/login/Login.view.html'
+    	templateUrl: 'js/login/login.view.html'
   }).when('/results', {
     	controller: 'ResultsController',
     	templateUrl: 'js/results/results.view.html'
