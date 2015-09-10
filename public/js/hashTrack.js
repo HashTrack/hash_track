@@ -1,7 +1,6 @@
 var hashTrack = angular.module('hashTrack', ['ngRoute']);
 
-hashTrack.config(function($routeProvider, $locationProvider) {
-	$locationProvider.html5Mode(true);
+hashTrack.config(function($routeProvider) {
 	$routeProvider.when('/', {
     	controller: 'SearchController',
     	templateUrl: 'js/search/search.view.html'
