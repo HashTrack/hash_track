@@ -19,7 +19,7 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', function($sc
         console.log($scope.hashtagData);
       })
       .error(function (e) {
-        console.log('oopps');
+        console.log('You goofed somewhere...');
       })};
 
   $scope.getDataNoGeo();
