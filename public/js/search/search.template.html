@@ -1,14 +1,14 @@
-<div id="search">
+<div ng-controller='SearchController' id="search">
 	<section class="panel panel-default">
 		<article class="panel-body">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-				    <div class="input-group">
-				      <input type="text" class="form-control" placeholder="Search hashtags...">
+				    <form ng-submit='searchHashtag(hashtag)' class="input-group">
+				      <input type="text" class="form-control" name='hashtag' ng-model='hashtag' placeholder="Search hashtag...">
 				      <span class="input-group-btn">
-				        <a href="#/results"><button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button></a>
+				      <button type='submit' class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
 				      </span>
-				    </div><!-- /input-group -->
+				    </form><!-- /input-group -->
 			    </div>
 			</div>
 		</article>
