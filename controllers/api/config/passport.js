@@ -7,14 +7,24 @@ passport.use(new LocalStrategy({
  	usernameField: 'email_address'
  	},
  	function(username, password, done) {
+ 		console.log('beginning of passport middleware')
  		User.findOne({ email_address: username }, function(error, user) {
+ 			console.log('user find callback after passport middleware');
+ 			console.log(user);
  			if (error) return done(error);
- 			if ((!user) || (!user.validatePassword(password))) {
+ 			if (!user) {
  				return done(null, false, {
  					message: 'Email address and/or password are missing or incorrect'
  				});
- 			}
- 			return done(null, user);
+ 			};
+ 			user.validatePassword(password, user.password_hash, function(auth) {
+ 				if (!auth) {
+	 				return done(null, false, {
+	 					message: 'Email address and/or password are missing or incorrect'
+	 				});  					
+	 			}
+	 			return done(null, user);
+ 			});
  		});
  	}
 )); 
