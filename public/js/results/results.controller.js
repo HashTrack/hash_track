@@ -17,7 +17,9 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
   })};
 
   $scope.grabUniqueUsers = function (data) {
-    
+    var json = data, i, l;
+    console.log('data in unique function');
+    console.log(json);
   };
 
   $scope.grabUniqieTweets = function (data) {
@@ -26,7 +28,8 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
 
 
   $scope.getDataNoGeo();
+  $scope.grabUniqueUsers($scope.hashtagData);
   // $scope.grabUniqieTweets($scope.hashtagData);
-  // $scope.grabUniqueUsers($scope.hashtagData);
+
 
 }]);
