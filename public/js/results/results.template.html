@@ -10,7 +10,8 @@
         <span class="counts" ng-if="user_spinner"><i class="fa fa-users"></i>Unique users: <img src="/images/ajax-loader_sm.gif" alt="spinner" /></span>
         </div>
         <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-5 col-xs-offset-1">
-        <span class="counts"><i class="fa fa-comment"></i>Unique tweets: {{ info.tweets }}</span>
+        <span class="counts" ng-if="tweet_spinner === false"><i class="fa fa-comment"></i>Unique tweets: {{ info.tweets }}</span>
+        <span class="counts" ng-if="tweet_spinner"><i class="fa fa-users"></i>Unique tweets: <img src="/images/ajax-loader_sm.gif" alt="spinner" /></span>
         </div>
       <div class="col-lg-2 col-lg-offset-0 col-md-offset-1 col-md-2 col-sm-2 col-sm-offset-0 col-xs-2 col-xs-offset-0">
           <div class="input-group">
