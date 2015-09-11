@@ -6,7 +6,7 @@ hashTrack.controller('LoginController', ['$scope', '$rootScope', 'authentication
 	};
 
 	// initialize auth type
-	$scope.authType = "";
+	$scope.authType = 'select';
 
 	//define the return page
 	$scope.returnPage = $location.search().page || '/track';
