@@ -1,13 +1,8 @@
 hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParams', function($scope, searchNoGeo,$routeParams) {
   $scope.apps = [{
-    hashtag: '#pizza',
+    hashtag: $routeParams.hashtag,
     users: 14,
     tweets: 18
-    },
-    {
-    hashtag: '#burgers',
-    users: 9,
-    tweets: 14
     }
   ];
 
@@ -19,8 +14,19 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
       })
       .error(function (e) {
         console.log('You goofed somewhere...');
-      })};
+  })};
+
+  $scope.grabUniqueUsers = function (data) {
+    
+  };
+
+  $scope.grabUniqieTweets = function (data) {
+
+  };
+
 
   $scope.getDataNoGeo();
+  // $scope.grabUniqieTweets($scope.hashtagData);
+  // $scope.grabUniqueUsers($scope.hashtagData);
 
 }]);
