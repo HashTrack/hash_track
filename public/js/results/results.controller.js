@@ -19,9 +19,9 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
   })};
 
   $scope.grabUniqueUsers = function (data) {
-    var json = data, i, l;
-    console.log('data in unique function');
-    console.log(json);
+    var i, l;
+    console.log(data[0]);
+
 
   };
 
