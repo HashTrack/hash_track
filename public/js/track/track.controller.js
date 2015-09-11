@@ -1,11 +1,10 @@
-hashTrack.controller('TrackController', ['$scope', '$http', 'authentication', '$location', function($scope, $http, authentication, $location) {
-  
+hashTrack.controller('TrackController', ['$scope', '$http', 'track', 'authentication', '$location', function($scope, $http, track, authentication, $location) {
+
 if (!authentication.isLoggedIn()) {
   $location.path('/login')
 }
-
-  // test data
-  $scope.apps = [{
+// test data
+$scope.apps = [{
   hashtag: '#meanstack',
   users: 14,
   tweets: 18
@@ -14,31 +13,19 @@ if (!authentication.isLoggedIn()) {
   hashtag: '#javascript',
   users: 9,
   tweets: 14
-  },
-  {
-  hashtag: '#rubybitches',
-  users: 9,
-  tweets: 14
-  },
-  {
-  hashtag: '#eatrailsforbreakfast',
-  users: 9,
-  tweets: 14
-  },
-  {
-  hashtag: '#jslife',
-  users: 9,
-  tweets: 14
-  },
-  {
-  hashtag: '#makejavascript',
-  users: 9,
-  tweets: 14
-  },
-  {
-  hashtag: '#rubylife2015',
-  users: 9,
-  tweets: 14
   }
-]
+];
+
+$scope.clickAndTrackHashtag = function (hashtag, userCount, tweetCount) {
+  var currentUser = authentication.currentUser._id;
+  var currentHashtag = hashtag;
+  var currentUserCount = userCount;
+  var currentTweetCount = tweetCount;
+  // console.log(currentUser);
+  // console.log(currentHashtag);
+  // console.log(currentUserCount);
+  // console.log(currentTweetCount);
+
+
+};
 }]);
