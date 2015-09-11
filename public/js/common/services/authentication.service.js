@@ -1,5 +1,4 @@
 (function() {
-	console.log('authentication service active...');
 	angular
 	.module('hashTrack')
 	.service('authentication', authentication);
