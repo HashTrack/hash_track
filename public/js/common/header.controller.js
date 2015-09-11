@@ -1,5 +1,10 @@
-hashTrack.controller('HeaderController', ['$scope', 'authentication', function($scope, authentication) {
-	if (authentication.isLoggedIn()) {
-		console.log('header says logged in is: ' + authentication.currentUser().email_address);
+hashTrack.controller('HeaderController', ['$scope', '$rootScope', 'authentication', '$location', function($scope, $rootScope, authentication, $location) {
+	$scope.loggedIn = function() { return authentication.isLoggedIn(); };
+	
+	console.log('$scope.loggedIn = ' + $scope.loggedIn());
+
+	$scope.signout = function() {
+		authentication.logout();
 	}
+
 }]);

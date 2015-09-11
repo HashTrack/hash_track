@@ -1,4 +1,12 @@
-hashTrack.controller('TrackController', ['$scope', function($scope) {
+hashTrack.controller('TrackController', ['$scope', '$http', 'authentication', '$location', function($scope, $http, authentication, $location) {
+  
+if (!authentication.isLoggedIn()) {
+  $location.path('/login')
+}
+
+
+
+  // test data
   $scope.apps = [{
   hashtag: '#meanstack',
   users: 14,

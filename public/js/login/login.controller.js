@@ -1,4 +1,4 @@
-hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', '$location', function($scope, authentication, $http, $location) {
+hashTrack.controller('LoginController', ['$scope', '$rootScope', 'authentication', '$http', '$location', function($scope, $rootScope, authentication, $http, $location) {
 	// initialize credentials
 	$scope.credentials = {
 		email_address: "",
@@ -40,6 +40,7 @@ hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', '$
 				})
 				.then(function() {
 					console.log('login successful as user: ' + $scope.credentials.email_address);
+					$rootScope.currentUser = authentication.currentUser().email_address;
 					$location.search('page', null);
 					$location.path($scope.returnPage);
 				});
@@ -52,6 +53,7 @@ hashTrack.controller('LoginController', ['$scope', 'authentication', '$http', '$
 				})
 				.then(function() {
 					console.log('successful registration as user: ' + $scope.credentials.email_address);
+					$rootScope.currentUser = authentication.currentUser().email_address;
 					$location.search('page', null);
 					$location.path($scope.returnPage);
 				});
