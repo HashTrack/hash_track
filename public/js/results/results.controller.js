@@ -1,9 +1,9 @@
 hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParams', function($scope, searchNoGeo,$routeParams) {
   $scope.apps = [{
     hashtag: $routeParams.hashtag,
-    users: 14,
+    users: $scope.uniqueUsers,
     tweets: 18
-    }
+  }
   ];
 
   $scope.getDataNoGeo = function (callback_1, callback_2) {
@@ -19,8 +19,15 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
   })};
 
   $scope.grabUniqueUsers = function (data) {
-    var i, l;
-    console.log(data[0]);
+    var uniqueData = [], i, l, screenName;
+    for (i = 0, l = data.length; i<l; i++){
+      screenName = data[i].user.screen_name
+      if (uniqueData.indexOf(screenName) === -1)  {
+        uniqueData.push(screenName);
+      };
+    }
+    $scope.apps[0].users = uniqueData.length;
+    console.log(uniqueData.length);
 
 
   };
