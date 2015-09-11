@@ -4,8 +4,6 @@ if (!authentication.isLoggedIn()) {
   $location.path('/login')
 }
 
-
-
   // test data
   $scope.apps = [{
   hashtag: '#meanstack',
