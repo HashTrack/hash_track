@@ -7,7 +7,7 @@ hashTrack.config(function($routeProvider) {
   }).when('/login', {
     	controller: 'LoginController',
     	templateUrl: 'js/login/login.view.html'
-  }).when('/results/:hashtag', {
+  }).when('/results', {
     	controller: 'ResultsController',
     	templateUrl: 'js/results/results.view.html'
   }).when('/track', {

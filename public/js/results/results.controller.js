@@ -1,22 +1,21 @@
 hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParams', function($scope, searchNoGeo,$routeParams) {
-  $scope.apps = [{
-    hashtag: $routeParams.hashtag,
-    users: '',
-    tweets: ''
-  }
-  ];
+  console.log('Results Controler has the following Object.');
+  $scope.hashtagsToSearch = $routeParams.q;
+  $scope.apps = [];
+
+
 
   $scope.user_spinner = false;
   $scope.tweet_spinner = false;
 
-  $scope.getDataNoGeo = function (callback_1, callback_2) {
+  $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
     $scope.hashtagData = {};
     $scope.user_spinner = true;
     $scope.tweet_spinner = true;
-    searchNoGeo.getTweets($routeParams.hashtag)
+    searchNoGeo.getTweets(hashtag)
       .success(function(data) {
-        callback_1(data);
-        callback_2(data);
+        callback_1(data, index);
+        callback_2(data, index);
       })
       .error(function (e) {
         console.log('You goofed somewhere...');
@@ -37,16 +36,25 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
     return uniqueData.length;
   };
 
-  $scope.grabUniqueUsers = function (data) {
+  $scope.grabUniqueUsers = function (data, index) {
     $scope.user_spinner = false;
-    $scope.apps[0].users = $scope.dataCounter(data, 'user.screen_name');
+    $scope.apps[index].users = $scope.dataCounter(data, 'user.screen_name');
   };
 
-  $scope.grabUniqueTweets = function (data) {
+  $scope.grabUniqueTweets = function (data, index) {
     $scope.tweet_spinner = false;
-    $scope.apps[0].tweets = $scope.dataCounter(data, 'text');
+    $scope.apps[index].tweets = $scope.dataCounter(data, 'text');
   };
 
-  $scope.getDataNoGeo($scope.grabUniqueTweets, $scope.grabUniqueUsers);
+   for (hashtag in $scope.hashtagsToSearch) {
+    index = hashtag;
+    $scope.apps.push({
+      hashtag: $scope.hashtagsToSearch[hashtag],
+      users: '',
+      tweets: ''
+    });
+    $scope.getDataNoGeo($scope.hashtagsToSearch[hashtag], index, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
+  };
+
 
 }]);
