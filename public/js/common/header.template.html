@@ -4,11 +4,11 @@
 	</div>
 	<nav id='nav-bar' class="col-xs-12 col-xs-offset-0 col-sm-5 col-sm-offset-5 col-md-4 col-md-offset-6 col-lg-5 col-lg-offset-5">
 	  <ul class="nav nav-pills">
-	  	<li class="logged-in-user" role="presentation" ng-if="loggedIn()">{{ $root.currentUser }}: </li>
 	    <li role="presentation" class="pull-right" ng-if="loggedIn() != true"><a href="#/login">Login</a></li>
 	    <li role="presentation" class="pull-right" ng-click="signout()" ng-if="loggedIn()"><a href="#/">Sign Out</a></li>
 	    <li role="presentation" class="pull-right"><a href="#/track">Track</a></li>
 	    <li role="presentation" class="pull-right"><a href="#/">Search</a></li>
+	    <li class="logged-in-user pull-rightc" role="presentation" ng-if="loggedIn()">{{ $root.currentUser }}: </li>
 
 	  </ul>
 	</nav>
