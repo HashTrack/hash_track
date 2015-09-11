@@ -1,8 +1,8 @@
 hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParams', function($scope, searchNoGeo,$routeParams) {
   $scope.apps = [{
     hashtag: $routeParams.hashtag,
-    users: $scope.uniqueUsers,
-    tweets: 18
+    users: '',
+    tweets: ''
   }
   ];
 
@@ -23,31 +23,36 @@ hashTrack.controller('ResultsController', ['$scope', 'searchNoGeo', '$routeParam
 
   })};
 
-  $scope.grabUniqueUsers = function (data) {
-    var uniqueData = [], i, l, screenName;
+  $scope.dataCounter = function (data, dataToEvaluate) {
+    var uniqueData = [], keys = dataToEvaluate.split('.'), i, l, j, k, dataToCount;
     for (i = 0, l = data.length; i<l; i++){
-      screenName = data[i].user.screen_name
-      if (uniqueData.indexOf(screenName) === -1)  {
-        uniqueData.push(screenName);
+      dataToCount = data[i];
+      for (j = 0, k = keys.length; j<k; j++) {
+        dataToCount = dataToCount[keys[j]];
       };
+
     }
     $scope.user_spinner = false;
     $scope.apps[0].users = uniqueData.length;
     console.log(uniqueData.length);
 
 
+      if (uniqueData.indexOf(dataToCount) === -1)  {
+        uniqueData.push(dataToCount);
+      };
+    };
+    return uniqueData.length;
+  };
+
+
+  $scope.grabUniqueUsers = function (data) {
+    $scope.apps[0].users = $scope.dataCounter(data, 'user.screen_name');
   };
 
   $scope.grabUniqueTweets = function (data) {
-    console.log('-------------');
-    console.log('tweets function');
-    console.log('-------------');
+    $scope.apps[0].tweets = $scope.dataCounter(data, 'text');
   };
 
-
-  $scope.getDataNoGeo($scope.grabUniqueUsers, $scope.grabUniqueTweets);
-
-
-
+  $scope.getDataNoGeo($scope.grabUniqueTweets, $scope.grabUniqueUsers);
 
 }]);
