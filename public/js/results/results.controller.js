@@ -37,26 +37,48 @@ hashTrack.controller('ResultsController', ['$scope', 'authentication', 'track', 
     $scope.apps[index].tweets = $scope.dataCounter(data, 'text');
   };
 
-  var clickAndTrackHashtag = function (hashtag, userCount, tweetCount) {
+  var clickAndTrackHashtag = function (hashtag, userCount, tweetCount, index) {
     var currentUser = authentication.currentUser()._id;
     var currentHashtag = hashtag;
     var currentUserCount = userCount;
     var currentTweetCount = tweetCount;
     // make the post request
     track.trackHashtag(currentHashtag, currentUserCount, currentTweetCount, currentUser);
+    $scope.apps[index].tracked = true;
+    $scope.apps[index].trackButtonText = 'Tracked';
+    $scope.apps[index].isDisabled = true;
   };
 
+  //check to see if any of the saerched hash tags are already tracked
+  var trackedHashTags = [];
+  if (authentication.isLoggedIn()) {
+    track.getTrackedHashTags(authentication.currentUser()._id, function(error, data) {
+      if (error) return error;
+      data.data.forEach(function(item) {
+        if (item.tracked) trackedHashTags.push(item.name);
+      });
+      $scope.processHashTags();
+      console.log($scope.apps);
+    });
+  }
+$scope.processHashTags = function() {  
    for (hashtag in $scope.hashtagsToSearch) {
+    var tracked = trackedHashTags.indexOf($scope.hashtagsToSearch[hashtag]) === -1 ? false : true;
+    var button = tracked ? 'Tracking' : 'Track';
     index = hashtag;
     $scope.apps.push({
+      i: index,
       hashtag: $scope.hashtagsToSearch[hashtag],
-      tracked: false,
+      tracked: tracked,
       users: '',
       tweets: '',
       ajax: { user: true, tweet: true },
-      track: clickAndTrackHashtag
+      track: clickAndTrackHashtag,
+      trackButtonText: button,
+      isDisabled: tracked
     });
     $scope.getDataNoGeo($scope.hashtagsToSearch[hashtag], index, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
   };
+};
 
 }]); //end of the controller
