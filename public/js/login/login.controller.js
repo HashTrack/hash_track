@@ -5,11 +5,14 @@ hashTrack.controller('LoginController', ['$scope', '$rootScope', 'authentication
 		password: "",
 	};
 
+	// make sure not logged in or else bounce them
+	if (authentication.isLoggedIn()) $location.path('/');
+
 	// initialize auth type
 	$scope.authType = "select";
 
 	//define the return page
-	$scope.returnPage = $location.search().page || '/track';
+	$scope.returnPage = $location.search().page || '/';
 
 	$scope.submitAuth = function(email, password, authType) {
 		console.log('Login button clicked...');

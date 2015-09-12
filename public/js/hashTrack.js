@@ -15,7 +15,7 @@ hashTrack.config(function($routeProvider) {
     	templateUrl: 'js/track/track.view.html'
   }).when('/tweets', {
     	controller: 'TweetsController',
-    	templateUrl: 'js/track/tweets.view.html'
+    	templateUrl: 'js/tweets/tweets.view.html'
   }).otherwise({
     redirectTo: '/'
   });

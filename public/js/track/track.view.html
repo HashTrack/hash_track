@@ -1,7 +1,9 @@
 <div id="track">
   <section class="panel panel-default">
     <article class="panel-body">
-
+	 	<div class="row">
+    		<div class="col-sm-12 col-md-10 col-lg-8 col-lg-offset-3 col-md-offset-2 message">{{message}}</div>
+  		</div>
       <div ng-repeat="app in apps">
         <show-track info="app" ng-if="app.tracked"></show-track>
       </div>

@@ -1,8 +1,9 @@
 /* GLOBAL STYLES  */
-html,body {
+html,body, #map_canvas {
 	margin: 0;
 	padding: 0;
 	height: 100%; /* needed for container min-height */
+	width: 100%;
 	font-family: 'Work Sans', sans-serif;
 }
 
@@ -153,6 +154,12 @@ section.panel {
 	margin: 0;
 }
 
+.message {
+	font-family: 'Work Sans', sans-serif;
+	font-size: 5rem;
+	font-weight: 100;
+}
+
 .hashtag {
 	font-weight: 300;
 	font-size: 3rem;
@@ -181,7 +188,7 @@ section.panel {
 	overflow-y: scroll;
 	@media (max-width: 768px) {
 		height: 5rem;
-		top: 0rem;
+		top: 16rem;
 		overflow-y: visible;
 	}
 	.panel {
@@ -191,6 +198,14 @@ section.panel {
 }
 
 /* MAP / TWEETS STYLES */
+#map_canvas {
+    position: relative;
+}
+
 .angular-google-map-container {
-	height: 400px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
