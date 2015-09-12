@@ -1,4 +1,4 @@
-hashTrack.controller('ResultsController', ['$scope', 'track', 'searchNoGeo', '$routeParams', function($scope, track, searchNoGeo,$routeParams) {
+hashTrack.controller('ResultsController', ['$scope', 'authentication', 'track', 'searchNoGeo', '$routeParams', function($scope, authentication, track, searchNoGeo,$routeParams) {
   console.log('Results Controler has the following Object.');
   $scope.hashtagsToSearch = $routeParams.q;
   $scope.apps = [];
@@ -57,7 +57,7 @@ hashTrack.controller('ResultsController', ['$scope', 'track', 'searchNoGeo', '$r
   };
 
   $scope.clickAndTrackHashtag = function (hashtag, userCount, tweetCount) {
-    var currentUser = authentication.currentUser._id;
+    var currentUser = authentication.currentUser()._id;
     var currentHashtag = hashtag;
     var currentUserCount = userCount;
     var currentTweetCount = tweetCount;
