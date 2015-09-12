@@ -44,7 +44,8 @@
 				var token = getToken();
 				var payload = JSON.parse($window.atob(token.split('.')[1]));
 				return {
-					email_address: payload.email_address
+					email_address: payload.email_address,
+					_id: payload._id
 				};
 			};
 		};
