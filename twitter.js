@@ -48,7 +48,25 @@ twitter.twitterSearch = function(query, authToken, callback) {
 	//execute the POST request to OAuth
 	twitter.executeTwitterAPICall(authToken, function(bearer_token) {
 		var search = qs.stringify({ q: query, count: 100 });
-		var url = "https://api.twitter.com/1.1/search/tweets.json?" + search
+		var url = "https://api.twitter.com/1.1/search/tweets.json?" + search;
+		console.log("getting data from: " + url);
+		var options = {
+			method: 'GET',
+			url: url,
+			headers: { "Authorization": "Bearer " + bearer_token }
+		}
+		request(options, function(error, response, body) {
+			var results = JSON.parse(body).statuses;
+			callback(results);
+		});
+	});
+}
+
+twitter.twitterHashtag = function(query, authToken, callback) {
+	//execute the POST request to OAuth
+	twitter.executeTwitterAPICall(authToken, function(bearer_token) {
+		var search = qs.stringify({ q: '#' + query, count: 100 });
+		var url = "https://api.twitter.com/1.1/search/tweets.json?" + search;
 		console.log("getting data from: " + url);
 		var options = {
 			method: 'GET',

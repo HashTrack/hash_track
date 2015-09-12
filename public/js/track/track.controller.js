@@ -3,59 +3,22 @@ hashTrack.controller('TrackController', ['$scope', '$http', 'track', 'searchNoGe
 if (!authentication.isLoggedIn()) {
   $location.path('/login')
 }
-// test data
-// $scope.apps = [{
-//   hashtag: '#meanstack',
-//   users: 14,
-//   tweets: 18,
-//   tracked: true
-//   },
-//   {
-//   hashtag: '#javascript',
-//   users: 9,
-//   tweets: 14,
-//   tracked: false
-//   }
-// ];
-
-$scope.user_spinner = false;
-$scope.tweet_spinner = false;
 $scope.apps = [];
-$scope.noTrackedHashTagsMessage = "You currently do not have any tracked hashtags...";
-$scope.trackedHashTags = false;
-
-$scope.trackedHashTagStatus = function(status) {
-  if (typeof status != 'undefined') $scope.trackedHashTags = status;
-  return $scope.trackedHashTags;
-}
-
-console.log('hashtags tracked? ' + $scope.trackedHashTagStatus());
 
 track.getTrackedHashTags(authentication.currentUser()._id, function(error, data) {
-  if (error) console.log(error);
-  console.log('in the gettrcked callback');
-  console.log(data);
+  if (error) 
   $scope.hashTagsToSearch = [];
   $scope.processHashTags(data.data);
-  if ($scope.apps.length === 0) {
-    $scope.trackedHashTagStatus(false);
-  } else {
-    $scope.trackedHashTagStatus(true);
-  }
 });
 
 $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
   $scope.hashtagData = {};
-  $scope.user_spinner = true;
-  $scope.tweet_spinner = true;
   searchNoGeo.getTweets(hashtag)
     .success(function(data) {
       callback_1(data, index);
       callback_2(data, index);
     })
     .error(function (e) {
-      console.log('You goofed somewhere...');
-
 })};
 
 $scope.dataCounter = function (data, dataToEvaluate) {
@@ -73,39 +36,34 @@ $scope.dataCounter = function (data, dataToEvaluate) {
 };
 
 $scope.grabUniqueUsers = function (data, index) {
-  $scope.user_spinner = false;
+  $scope.apps[index].ajax.user = false;
   $scope.apps[index].users = $scope.dataCounter(data, 'user.screen_name');
 };
 
 $scope.grabUniqueTweets = function (data, index) {
-  $scope.tweet_spinner = false;
-  $scope.apps[index].tweets = $scope.dataCounter(data, 'text');
+  $scope.apps[index].ajax.tweet = false;
+  $scope.apps[index].tweets = $scope.dataCounter(data, 'text'); 
 };
 
-$scope.processHashTags = function(hashtags) {
+$scope.processHashTags = function(hashtags) {  
   for (hashtag in hashtags) {
     index = hashtag;
     $scope.apps.push({
       hashtag: hashtags[hashtag].name,
       users: '',
       tweets: '',
-      tracked: hashtags[hashtag].tracked
-    });
-    $scope.getDataNoGeo(hashtags[hashtag], index, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
+      tracked: hashtags[hashtag].tracked,
+      ajax: { user: true, tweet: true }
+    });  
+    $scope.getDataNoGeo(hashtags[hashtag].name, index, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
   };
 };
-
-
 
 $scope.clickAndTrackHashtag = function (hashtag, userCount, tweetCount) {
   var currentUser = authentication.currentUser._id;
   var currentHashtag = hashtag;
   var currentUserCount = userCount;
   var currentTweetCount = tweetCount;
-  console.log(currentUser);
-  console.log(currentHashtag);
-  console.log(currentUserCount);
-  console.log(currentTweetCount);
   // make the post request
   track.trackHashtag(currentHashtag, currentUserCount, currentTweetCount, currentUser);
 };

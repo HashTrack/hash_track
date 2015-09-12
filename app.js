@@ -6,8 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var bodyParser = require('body-parser');
-var passport = require('passport'); 
-
+var passport = require('passport');
+var favicon = require('serve-favicon');
 
 // launch database connections
 require('./models/db');
@@ -40,6 +40,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(__dirname + '/public/images/favicon.ico')); 
 
 // initialize passport
 app.use(passport.initialize()); 

@@ -5,6 +5,7 @@ hashTrack.factory('track', ['$http', 'authentication', function($http, authentic
   };
 
   var trackHashtag = function (hashtag, userCount, tweetCount, userId) {
+    console.log('Saving hashtag: ' + hashtag + ' to the tracked DB...');
     var token = getToken();
     $http.defaults.headers.common.Authorization = "Bearer " + token;
     $http.post('/api/hashtags', {
@@ -31,6 +32,7 @@ hashTrack.factory('track', ['$http', 'authentication', function($http, authentic
       callback(error, null);
     })    
     .then(function(data) {
+      console.log('Got the tags, calling back to controller')
       callback(null, data);
     });
   }

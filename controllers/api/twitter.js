@@ -8,7 +8,7 @@ router.get('/search/:hashtag', function(req, res, next) {
 	// Execute a Twitter search for any hashtag
 	// get the query sytax
 	var query = req.params.hashtag;
-	twitter.twitterSearch(query, twitter.authToken(), function(data) {
+	twitter.twitterHashtag(query, twitter.authToken(), function(data) {
 		//get the hashtags from the tweet
 		res.json(data);
 	});

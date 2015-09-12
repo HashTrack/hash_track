@@ -1,4 +1,4 @@
-<div ng-controller="ResultsController">
+
   <div class="row">
     <div class="col-lg-4 col-lg-offset-3 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-3 col-xs-offset-1">
       <span class="hashtag">#{{ info.hashtag }}</span> 
@@ -6,18 +6,18 @@
   </div>
   <div class="row">
       <div class="col-lg-2 col-lg-offset-3 col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-9 col-xs-offset-1">
-        <span class="counts" ng-if="user_spinner === false"><i class="fa fa-users"></i>Unique users: {{ info.users }}</span>
-        <span class="counts" ng-if="user_spinner"><i class="fa fa-users"></i>Unique users: <img src="/images/ajax-loader_sm.gif" alt="spinner" /></span>
+        <span class="counts" ng-show="info.ajax.user"><i class="fa fa-users"></i>Unique users: <img src="/images/ajax-loader_sm.gif" alt="spinner" /></span>
+        <span class="counts" ng-hide="info.ajax.user"><i class="fa fa-users"></i>Unique users: {{ info.users }}</span>
         </div>
         <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-5 col-xs-offset-1">
-        <span class="counts" ng-if="tweet_spinner === false"><i class="fa fa-comment"></i>Unique tweets: {{ info.tweets }}</span>
-        <span class="counts" ng-if="tweet_spinner"><i class="fa fa-users"></i>Unique tweets: <img src="/images/ajax-loader_sm.gif" alt="spinner" /></span>
+        <span class="counts" ng-show="info.ajax.tweet"><i class="fa fa-users"></i>Unique tweets: <img src="/images/ajax-loader_sm.gif" alt="spinner" /></span>
+        <span class="counts" ng-hide="info.ajax.tweet"><i class="fa fa-comment"></i>Unique tweets: {{ info.tweets }}</span>
         </div>
       <div class="col-lg-2 col-lg-offset-0 col-md-offset-1 col-md-2 col-sm-2 col-sm-offset-0 col-xs-2 col-xs-offset-0">
           <div class="input-group">
               <span class="input-group-btn">
                   <button class="btn btn-default" type="button">View</button>
-                  <button class="btn btn-primary" ng-click="clickAndTrackHashtag(info.hashtag, info.users, info.tweets)" type="button">Track</button>
+                  <button class="btn btn-primary" ng-click="info.track(info.hashtag, info.users, info.tweets)" type="button">Track</button>
               </span>
             </div>
       </div>
@@ -25,4 +25,3 @@
   <div class="row">
     <hr class="col-lg-6 col-lg-offset-3">
   </div>
-</div>
