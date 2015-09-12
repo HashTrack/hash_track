@@ -1,4 +1,4 @@
-var hashTrack = angular.module('hashTrack', ['ngRoute']);
+var hashTrack = angular.module('hashTrack', ['ngRoute', 'uiGmapgoogle-maps']);
 
 hashTrack.config(function($routeProvider) {
 	$routeProvider.when('/', {

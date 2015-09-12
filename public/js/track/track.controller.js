@@ -21,6 +21,15 @@ if (!authentication.isLoggedIn()) {
 $scope.user_spinner = false;
 $scope.tweet_spinner = false;
 $scope.apps = [];
+$scope.noTrackedHashTagsMessage = "You currently do not have any tracked hashtags...";
+$scope.trackedHashTags = false;
+
+$scope.trackedHashTagStatus = function(status) {
+  if (typeof status != 'undefined') $scope.trackedHashTags = status;
+  return $scope.trackedHashTags;
+}
+
+console.log('hashtags tracked? ' + $scope.trackedHashTagStatus());
 
 track.getTrackedHashTags(authentication.currentUser()._id, function(error, data) {
   if (error) console.log(error);
@@ -28,7 +37,11 @@ track.getTrackedHashTags(authentication.currentUser()._id, function(error, data)
   console.log(data);
   $scope.hashTagsToSearch = [];
   $scope.processHashTags(data.data);
-  console.log($scope.apps);
+  if ($scope.apps.length === 0) {
+    $scope.trackedHashTagStatus(false);
+  } else {
+    $scope.trackedHashTagStatus(true);
+  }
 });
 
 $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
@@ -70,7 +83,6 @@ $scope.grabUniqueTweets = function (data, index) {
 };
 
 $scope.processHashTags = function(hashtags) {
-  console.log('data.data looks like: ');
   for (hashtag in hashtags) {
     index = hashtag;
     $scope.apps.push({
