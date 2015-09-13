@@ -6,5 +6,4 @@ hashTrack.controller('HeaderController', ['$scope', '$window', '$rootScope', 'au
 	$scope.signout = function() {
 		authentication.logout();
 	};
-
 }]);

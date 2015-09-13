@@ -1,10 +1,23 @@
 <div id="tweets">
-	<section class="panel panel-default">
-		<article class="panel-body">
 			<div class="row">
 	  			<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
 			</div>
-			<!-- <show-tweets></show-tweets> -->
-		</article>
-	</section>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default pre-message">
+						<div class="panel-body">
+							<article class="please-wait">
+								<h1>Please wait while your position is located...<h1>
+								<img src="/images/ajax-loader_md.gif" alt="ajax load spinner" />
+							</article>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default tweet-panel">
+				<div class="panel-heading">Latest Tweets</div>
+					<div class="panel-body" ng-repeat="app in apps">
+						<show-tweets info="app"></show-tweets>
+					</div>
+			</div>
 </div>

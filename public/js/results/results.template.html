@@ -16,7 +16,7 @@
       <div class="col-lg-2 col-lg-offset-0 col-md-offset-1 col-md-2 col-sm-2 col-sm-offset-0 col-xs-2 col-xs-offset-0">
           <div class="input-group">
               <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">View</button>
+                  <button class="btn btn-default" type="button" ng-click="info.viewTweets(info.hashtag)">View</button>
                   <button class="btn btn-primary" ng-click="info.track(info.hashtag, info.users, info.tweets, info.i)" type="button" ng-disabled="info.isDisabled">{{info.trackButtonText}}</button>
               </span>
             </div>
