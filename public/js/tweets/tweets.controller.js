@@ -1,4 +1,6 @@
-hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', 'geo', function($scope, $window, $routeParams, geo) {
+hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', 'geo', 'searchgeo', function($scope, $window, $routeParams, geo, searchgeo) {
+	$scope.hashtag = $routeParams.h;
+
 	geo.getUserGeo(function(error, geolocation) {
 		if (error) {
 			geolocation.latitude = 74;
@@ -15,4 +17,17 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 			$scope.$digest();
 		})();
 	});
+
+	var doGetLocalTweets = function() {
+		searchgeo.getGeoTweets($scope.hashtag, 20, function(error, data) {
+			if (error) return error;
+			$scope.apps = data;
+			data.forEach(function(tweet) {
+				console.log(tweet.text);
+			});
+		});	
+	}
+ 
+	doGetLocalTweets();
+
 }]);

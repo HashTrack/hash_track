@@ -14,10 +14,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default tweet-panel">
-				<div class="panel-heading">Latest Tweets</div>
-					<div class="panel-body" ng-repeat="app in apps">
-						<show-tweets info="app"></show-tweets>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="panel panel-default tweet-panel">
+						<div class="panel-heading">#{{ hashtag }}</div>
+							<div class="panel-body" ng-repeat="app in apps">
+								<show-tweets info="app"></show-tweets>
+							</div>
 					</div>
+				</div>
 			</div>
 </div>

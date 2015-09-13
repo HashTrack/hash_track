@@ -10,8 +10,10 @@ hashTrack.controller('ResultsController', ['$scope', '$location', 'authenticatio
         callback_1(data, index);
         callback_2(data, index);
       })
-      .error(function (e) {
-  })};
+      .error(function (error) {
+        return error;
+      });
+  };
 
   $scope.dataCounter = function (data, dataToEvaluate) {
     var uniqueData = [], keys = dataToEvaluate.split('.'), i, l, j, k, dataToCount;
