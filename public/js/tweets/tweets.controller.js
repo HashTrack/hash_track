@@ -21,10 +21,23 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 	var doGetLocalTweets = function() {
 		searchgeo.getGeoTweets($scope.hashtag, 20, function(error, data) {
 			if (error) return error;
-			$scope.apps = data;
-			data.forEach(function(tweet) {
-				console.log(tweet.text);
+			var newData = data.map(function(tweet) {
+				if (tweet.coordinates != null) {
+					tweet.geolocation = {
+						latitude: tweet.coordinates.coordinates[1],
+						longitude: tweet.coordinates.coordinates[0]
+					};
+					return tweet;
+				}
 			});
+			// for (i=0; i<=newData.length; i++) {
+			// 	if (typeof newData[i] === 'undefined') {
+			// 		newData.splice(i, 1);
+			// 	}
+			// }
+			var newData = newData.clean(undefined)
+			console.log(newData);
+			$scope.apps = newData;
 		});	
 	}
  
