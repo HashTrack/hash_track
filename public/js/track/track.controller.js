@@ -16,6 +16,10 @@ track.getTrackedHashTags(authentication.currentUser()._id, function(error, data)
   $scope.processHashTags(data.data);
 });
 
+var viewTweets = function(hashtag) {
+  $location.search({h: hashtag});
+  $location.path('/tweets');
+}
 $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
   $scope.hashtagData = {};
   searchNoGeo.getTweets(hashtag)
@@ -47,10 +51,10 @@ $scope.grabUniqueUsers = function (data, index) {
 
 $scope.grabUniqueTweets = function (data, index) {
   $scope.apps[index].ajax.tweet = false;
-  $scope.apps[index].tweets = $scope.dataCounter(data, 'text'); 
+  $scope.apps[index].tweets = $scope.dataCounter(data, 'text');
 };
 
-$scope.processHashTags = function(hashtags) {  
+$scope.processHashTags = function(hashtags) {
   for (hashtag in hashtags) {
     index = hashtag;
     $scope.apps.push({
@@ -59,8 +63,9 @@ $scope.processHashTags = function(hashtags) {
       tweets: '',
       tracked: hashtags[hashtag].tracked,
       ajax: { user: true, tweet: true },
+      viewTweets: viewTweets,
       message: ''
-    });  
+    });
     $scope.getDataNoGeo(hashtags[hashtag].name, index, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
   };
 };

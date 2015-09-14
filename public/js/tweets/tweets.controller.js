@@ -33,7 +33,10 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 			newData = searchgeo.clean(newData, undefined);
 			$scope.apps = newData;
 			$window.document.getElementsByClassName("loading-alert")[0].className += ' hidden';
-			$window.document.getElementsByClassName("tweet-list")[0].className -= ' hidden';
+			$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+			if ($scope.apps.length === 0){
+				$window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
+			};
 		});
 	}
 

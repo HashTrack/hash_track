@@ -21,6 +21,9 @@
 					<div class="panel panel-default tweet-panel">
 						<div class="panel-heading tweet-panel-head">#{{ hashtag }}</div>
 						<div class="panel-body tweet-panel-body">
+							<div class="no-hashtags hidden">
+								<h1>Sorry, no tweets found :(</h1>
+							</div>
 							<div ng-repeat="app in apps">
 								<show-tweets info="app"></show-tweets>
 							</div>
