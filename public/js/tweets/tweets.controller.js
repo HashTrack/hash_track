@@ -35,12 +35,12 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 			// 		newData.splice(i, 1);
 			// 	}
 			// }
-			var newData = newData.clean(undefined)
+			newData = searchgeo.clean(newData, undefined);
 			console.log(newData);
 			$scope.apps = newData;
-		});	
+		});
 	}
- 
+
 	doGetLocalTweets();
 
 }]);

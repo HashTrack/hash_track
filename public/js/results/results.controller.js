@@ -1,6 +1,9 @@
 hashTrack.controller('ResultsController', ['$scope', '$location', 'authentication', 'track', 'searchNoGeo', '$routeParams', function($scope, $location, authentication, track, searchNoGeo,$routeParams) {
   console.log('Results Controler has the following Object.');
   $scope.hashtagsToSearch = $routeParams.q;
+  console.log('----------------------');
+  console.log($scope.hashtagsToSearch);
+  console.log('----------------------');
   $scope.apps = [];
 
   $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
@@ -51,7 +54,7 @@ hashTrack.controller('ResultsController', ['$scope', '$location', 'authenticatio
       track.trackHashtag(currentHashtag, currentUserCount, currentTweetCount, currentUser);
       $scope.apps[index].tracked = true;
       $scope.apps[index].trackButtonText = 'Tracked';
-      $scope.apps[index].isDisabled = true;      
+      $scope.apps[index].isDisabled = true;
     }
   };
 
@@ -60,7 +63,7 @@ var viewTweets = function(hashtag) {
   $location.path('/tweets');
 }
 
-$scope.processHashTags = function() {  
+$scope.processHashTags = function() {
    for (hashtag in $scope.hashtagsToSearch) {
     var tracked = trackedHashTags.indexOf($scope.hashtagsToSearch[hashtag]) === -1 ? false : true;
     var button = tracked ? 'Tracking' : 'Track';

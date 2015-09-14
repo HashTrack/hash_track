@@ -1,15 +1,5 @@
 var hashTrack = angular.module('hashTrack', ['ngRoute', 'uiGmapgoogle-maps']);
 
-Array.prototype.clean = function(value) {
-  for (i=0; i<this.length; i++) {
-    if (this[i] == value) {
-      this.splice(i, 1);
-      i--;
-    }
-  }
-  return this;
-}
-
 hashTrack.config(function($routeProvider) {
 	$routeProvider.when('/', {
     	controller: 'SearchController',

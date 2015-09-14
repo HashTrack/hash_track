@@ -6,6 +6,17 @@ hashTrack.factory('searchgeo', ['$http', 'geo', function($http, geo) {
 		return $http.get(newURL);
 	}
 
+	var clean = function(data, value) {
+		  for (i=0; i<data.length; i++) {
+		    if (data[i] == value) {
+		      data.splice(i, 1);
+		      i--;
+		    }
+		  }
+		  return data;
+	};
+
+
 	var getGeoTweets = function(hashtag, radius, callback) {
 		console.log('in getGeoTweets');
 		geo.getUserGeo(function(error, geolocation) {
@@ -19,5 +30,8 @@ hashTrack.factory('searchgeo', ['$http', 'geo', function($http, geo) {
 		});
 	}
 
-	return { getGeoTweets: getGeoTweets };
+	return {
+		getGeoTweets: getGeoTweets,
+		clean: clean
+	};
 }]);
