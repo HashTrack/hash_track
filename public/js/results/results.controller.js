@@ -1,9 +1,9 @@
 hashTrack.controller('ResultsController', ['$scope', '$location', 'authentication', 'track', 'searchNoGeo', '$routeParams', function($scope, $location, authentication, track, searchNoGeo,$routeParams) {
   console.log('Results Controler has the following Object.');
   $scope.hashtagsToSearch = $routeParams.q;
-  console.log('----------------------');
-  console.log($scope.hashtagsToSearch);
-  console.log('----------------------');
+  if (typeof $scope.hashtagsToSearch === 'string') {
+    $scope.hashtagsToSearch = JSON.parse('["' + $scope.hashtagsToSearch + '"]');
+  };
   $scope.apps = [];
 
   $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
@@ -64,7 +64,7 @@ var viewTweets = function(hashtag) {
 }
 
 $scope.processHashTags = function() {
-   for (hashtag in $scope.hashtagsToSearch) {
+  for (hashtag in $scope.hashtagsToSearch) {
     var tracked = trackedHashTags.indexOf($scope.hashtagsToSearch[hashtag]) === -1 ? false : true;
     var button = tracked ? 'Tracking' : 'Track';
     index = hashtag;
