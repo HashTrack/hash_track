@@ -1,22 +1,19 @@
 hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', 'geo', 'searchgeo', function($scope, $window, $routeParams, geo, searchgeo) {
 	$scope.hashtag = $routeParams.h;
 
+var mapRender = function (callback){
 	geo.getUserGeo(function(error, geolocation) {
 		if (error) {
 			geolocation.latitude = 74;
 			geolocation.longitude = -111;
-			var mapOptions = { center: { latitude: 74, longitude: -111 }, zoom: 6 }
+			$scope.mapOptions = { center: { latitude: 74, longitude: -111 }, zoom: 6 }
 		} else {
-			var mapOptions = { center: { latitude: geolocation.latitude, longitude: geolocation.longitude }, zoom: 12 };
+			$scope.mapOptions = { center: { latitude: geolocation.latitude, longitude: geolocation.longitude }, zoom: 12 };
 		}
-
-		(function() {
-			console.log('latitude: ' + geolocation.latitude + ' longitude: ' + geolocation.longitude);
-			console.log(mapOptions);
-			$scope.map = mapOptions;
-			$scope.$digest();
-		})();
+		console.log('latitude: ' + geolocation.latitude + ' longitude: ' + geolocation.longitude);
 	});
+	callback ($scope.mapOptions);
+};
 
 	var doGetLocalTweets = function() {
 		searchgeo.getGeoTweets($scope.hashtag, 20, function(error, data) {
@@ -34,13 +31,18 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 			});
 			newData = searchgeo.clean(newData, undefined);
 			$scope.apps = newData;
-			$window.document.getElementsByClassName("loading-alert")[0].className += ' hidden';
-			$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
-			if ($scope.apps.length === 0){
-				$window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
-			};
+			mapRender(function (mapOptions) {
+				$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+				if ($scope.apps.length === 0){
+					$window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
+				};
+				$scope.map = mapOptions;
+				$scope.$digest();
+				$window.document.getElementsByClassName("loading-alert")[0].className += ' hidden';
+			});
+
 		});
-	}
+	};
 
 	doGetLocalTweets();
 
