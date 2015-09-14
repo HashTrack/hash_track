@@ -99,7 +99,7 @@ footer {
 	bottom: 30rem;
 	width: 100%;
 	@media (max-width: 660px) {
-		bottom: 5rem;	
+		bottom: 5rem;
 	}
 	.panel {
 		padding-top: 3rem;
@@ -140,7 +140,7 @@ footer {
 		input {
 			@media (max-width: 1085px) {
 				margin-bottom: 2rem;
-			}			
+			}
 		}
 	}
 }
@@ -212,6 +212,10 @@ section.panel {
     left: 0;
 }
 
+.hidden {
+	visibility: hidden;
+}
+
 .pre-message {
 	margin-top: 33%;
 	h1 {
@@ -225,17 +229,16 @@ section.panel {
 
 .tweet-panel {
 	position: absolute;
-	top: -32rem;
+
+	top:82px;
 	z-index: 2;
-	height: 80rem;
 	.tweet-panel-head {
 		font-family: 'Work Sans', sans-serif;
 		font-weight: 100;
 		font-size: 3.5rem;
 	}
 	.tweet-panel-body {
-		position: relative;
-		overflow-y: hidden;
+		overflow-y:	scroll;
+		max-height: 60rem;
 	}
 }
-

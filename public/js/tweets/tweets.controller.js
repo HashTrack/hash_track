@@ -30,14 +30,10 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 					return tweet;
 				}
 			});
-			// for (i=0; i<=newData.length; i++) {
-			// 	if (typeof newData[i] === 'undefined') {
-			// 		newData.splice(i, 1);
-			// 	}
-			// }
 			newData = searchgeo.clean(newData, undefined);
-			console.log(newData);
 			$scope.apps = newData;
+			$window.document.getElementsByClassName("loading-alert")[0].className += ' hidden';
+			$window.document.getElementsByClassName("tweet-list")[0].className -= ' hidden';
 		});
 	}
 

@@ -1,10 +1,10 @@
 <div id="tweets">
 			<div class="row">
 	  			<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-					<ui-gmap-marker idKey='app.id' coords='app.geolocation' ng-repeat="app in apps"></ui-gmap-marker>  
+					<ui-gmap-marker idKey='app.id' coords='app.geolocation' ng-repeat="app in apps"></ui-gmap-marker>
 	  			</ui-gmap-google-map>
 			</div>
-			<div class="row">
+			<div class="row loading-alert" >
 				<div class="col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default pre-message">
 						<div class="panel-body">
@@ -16,13 +16,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-7">
+			<div class="row tweet-list hidden">
+				<div class="col-sm-3 col-sm-offset-9">
 					<div class="panel panel-default tweet-panel">
 						<div class="panel-heading tweet-panel-head">#{{ hashtag }}</div>
-							<div class="panel-body tweet-panel-body" ng-repeat="app in apps">
+						<div class="panel-body tweet-panel-body">
+							<div ng-repeat="app in apps">
 								<show-tweets info="app"></show-tweets>
 							</div>
+						</div>
 					</div>
 				</div>
 			</div>
