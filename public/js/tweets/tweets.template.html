@@ -1,6 +1,7 @@
 <div id="tweet">
-	<ul>
-		<li>{{info.text}}</li>
-		<li>{{info.created_at}}</li>
+	<ul class="tweet-item">
+		<li class="tweet-text"><i class="fa fa-twitter tweet-icon"></i>{{ info.text }}</li>
+		<li class="tweet-date">{{ info.created_at | date : 'M/d/yy h:mm a' }}</li>
 	</ul>
 </div>
+<hr>

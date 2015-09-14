@@ -235,7 +235,7 @@ section.panel {
 .tweet-panel {
 	position: absolute;
 	width: 100%;
-	top:82px;
+	top: 82px;
 	z-index: 2;
 	.tweet-panel-head {
 		font-family: 'Work Sans', sans-serif;
@@ -246,4 +246,27 @@ section.panel {
 		overflow-y:	scroll;
 		max-height: 60rem;
 	}
+	@media (max-width: 1200px) {
+		top: 124px;
+	}
+	@media (max-width: 768px) {
+		top: 117px;
+	}
+	@media (max-width: 474px) {
+		top: 159px;
+	}
+}
+
+.tweet-item {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.tweet-date {
+	color: #98A2A5;
+}
+
+.tweet-icon {
+	color: rgb(29, 202, 255);
 }

@@ -27,6 +27,8 @@ hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', '
 						latitude: tweet.coordinates.coordinates[1],
 						longitude: tweet.coordinates.coordinates[0]
 					};
+					tweet.created_at = Date.parse(tweet.created_at);
+					tweet.mapOptions = {icon:'/images/tweet_icon.png'};
 					return tweet;
 				}
 			});
