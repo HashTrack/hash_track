@@ -69,10 +69,12 @@ $scope.processHashTags = function(hashtags) {
     index = hashtag;
     $scope.apps.push({
       hashtag: hashtags[hashtag].name,
+      index: index,
       users: 0,
       tweets: 0,
       tracked: hashtags[hashtag].tracked,
       track: $scope.clickAndTrackHashtag,
+      unTrack: unTrack,
       last_tweet_id: hashtags[hashtag].last_tweet_id,
       ajax: { user: true, tweet: true },
       viewTweets: viewTweets,
@@ -80,6 +82,10 @@ $scope.processHashTags = function(hashtags) {
     });
     $scope.getDataNoGeo(hashtags[hashtag].name, index, hashtags[hashtag].last_tweet_id, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
   };
+};
+
+var unTrack = function (index) {
+
 };
 
 $scope.clickAndTrackHashtag = function (hashtag, latest_id, i) {
