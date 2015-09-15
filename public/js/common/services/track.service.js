@@ -4,7 +4,7 @@ hashTrack.factory('track', ['$http', 'authentication', function($http, authentic
     return authentication.getToken();
   };
 
-  var trackHashtag = function (hashtag, userCount, tweetCount, userId) {
+  var trackHashtag = function (hashtag, last_tweet_id, userId) {
     console.log('Saving hashtag: ' + hashtag + ' to the tracked DB...');
     var token = getToken();
     $http.defaults.headers.common.Authorization = "Bearer " + token;
@@ -12,8 +12,7 @@ hashTrack.factory('track', ['$http', 'authentication', function($http, authentic
       name: hashtag,
       user: userId,
       tracked: true,
-      user_count: userCount,
-      tweet_count: tweetCount
+      last_tweet_id: last_tweet_id,
     }).error(function (error, content) {
       console.log(error);
     }).then( function (data) {

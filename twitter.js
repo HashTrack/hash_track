@@ -44,10 +44,10 @@ twitter.executeTwitterAPICall = function(authToken, callback) {
 	});
 }
 
-twitter.twitterSearch = function(query, authToken, callback) {
+twitter.twitterHashtagSearch = function(query, authToken, callback) {
 	//execute the POST request to OAuth
 	twitter.executeTwitterAPICall(authToken, function(bearer_token) {
-		var search = qs.stringify({ q: query, count: 100 });
+		var search = qs.stringify(query);
 		var url = "https://api.twitter.com/1.1/search/tweets.json?" + search;
 		console.log("getting data from: " + url);
 		var options = {
@@ -57,28 +57,22 @@ twitter.twitterSearch = function(query, authToken, callback) {
 		}
 		request(options, function(error, response, body) {
 			var results = JSON.parse(body).statuses;
-			callback(results);
+			var highest_id = twitter.getHighestId(results);
+			var lowest_id = twitter.getLowestId(results);
+			callback(results, highest_id, lowest_id);
 		});
 	});
-}
+};
 
-twitter.twitterHashtag = function(query, authToken, callback) {
-	//execute the POST request to OAuth
-	twitter.executeTwitterAPICall(authToken, function(bearer_token) {
-		var search = qs.stringify({ q: '#' + query, count: 100 });
-		var url = "https://api.twitter.com/1.1/search/tweets.json?" + search;
-		console.log("getting data from: " + url);
-		var options = {
-			method: 'GET',
-			url: url,
-			headers: { "Authorization": "Bearer " + bearer_token }
-		}
-		request(options, function(error, response, body) {
-			var results = JSON.parse(body).statuses;
-			callback(results);
-		});
-	});
-}
+twitter.getHighestId = function(data) {
+	var ids = data.map(function(tweet) { return tweet.id });
+	return Math.max.apply(Math, ids);
+};
+
+twitter.getLowestId = function(data) {
+	var ids = data.map(function(tweet) { return tweet.id });
+	return Math.min.apply(Math, ids);
+};
 
 twitter.parseHashtags = function(tweet) {
 	var hashtags = [];
@@ -87,13 +81,6 @@ twitter.parseHashtags = function(tweet) {
 	});
 	return hashtags;
 }
-
-// twitter.filter = function(data, fields) {
-// 	ret = [];
-// 	data.forEach(function(item) {
-
-// 	});
-// }
 
 twitter.geoHashTagQuery = function(hashtag, lat, lon, radius) {
 	var ret = '#' + hashtag + ' geocode:' + lat.toString() + ',' + lon.toString() + ',' + radius.toString() + 'km';

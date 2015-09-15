@@ -1,5 +1,7 @@
 hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', 'geo', 'searchgeo', function($scope, $window, $routeParams, geo, searchgeo) {
-	$scope.hashtag = $routeParams.h;
+$scope.hashtag = $routeParams.h;
+
+$scope.apps = [];
 
 var mapDigest = function (callback) {
 	console.log('before digest');
@@ -22,11 +24,11 @@ var mapRender = function (callback){
 	});
 };
 
-	var doGetLocalTweets = function() {
+	var doGetLocalTweets = function(since) {
 		searchgeo.getGeoTweets($scope.hashtag, 160, function(error, data) {
 			if (error) return error;
 			var i = 1;
-			var newData = data.map(function(tweet) {
+			var newData = data.tweets.map(function(tweet) {
 				var ret = {};
 				if (tweet.coordinates != null) {
 					ret.geolocation = {
@@ -43,7 +45,7 @@ var mapRender = function (callback){
 				}
 			});
 			newData = searchgeo.clean(newData, undefined);
-			$scope.apps = newData;
+			$scope.apps = $scope.apps.concat(newData);
 			mapRender(function (mapOptions) {
 				$scope.map = mapOptions;
 				mapDigest(function() {
@@ -51,15 +53,16 @@ var mapRender = function (callback){
 					if ($scope.apps.length === 0){
 						$window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
 					};
-					$window.document.getElementsByClassName("loading-alert")[0].className += ' hidden';
-					console.log('are we still waiting for the map?');
 				});
 
 			});
-
-		});
+			if (data.tweets.length > 1) { 
+				doGetLocalTweets(data.highest_id);
+			} else {
+				$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
+			}
+		}, since);
+		return true;
 	};
-
 	doGetLocalTweets();
-
 }]);

@@ -6,12 +6,16 @@ hashTrack.controller('ResultsController', ['$scope', '$location', 'authenticatio
   };
   $scope.apps = [];
 
-  $scope.getDataNoGeo = function (hashtag, index, callback_1, callback_2) {
+  $scope.getDataNoGeo = function (hashtag, index, since, callback_1, callback_2) {
     $scope.hashtagData = {};
-    searchNoGeo.getTweets(hashtag)
+    searchNoGeo.getTweets(hashtag, since)
       .success(function(data) {
         callback_1(data, index);
         callback_2(data, index);
+        if (data.tweets.length === 100) {
+          console.log('executing additional calls to Twitter...');
+          $scope.getDataNoGeo(hashtag, index, data.highest_id, callback_1, callback_2);
+        }
       })
       .error(function (error) {
         return error;
@@ -34,27 +38,29 @@ hashTrack.controller('ResultsController', ['$scope', '$location', 'authenticatio
 
   $scope.grabUniqueUsers = function (data, index) {
     $scope.apps[index].ajax.user = false;
-    $scope.apps[index].users = $scope.dataCounter(data, 'user.screen_name');
+    $scope.apps[index].last_tweet_id = $scope.apps[index].last_tweet_id ? $scope.apps[index].last_tweet_id : data.lowest_id;
+    $scope.apps[index].users += $scope.dataCounter(data.tweets, 'user.screen_name');
   };
 
   $scope.grabUniqueTweets = function (data, index) {
     $scope.apps[index].ajax.tweet = false;
-    $scope.apps[index].tweets = $scope.dataCounter(data, 'text');
+    $scope.apps[index].last_tweet_id = $scope.apps[index].last_tweet_id ? $scope.apps[index].last_tweet_id : data.lowest_id;
+    console.log('$scope.apps[' + index + '].last_tweet_id = ' + $scope.apps[index].last_tweet_id);
+    $scope.apps[index].tweets += $scope.dataCounter(data.tweets, 'text');
   };
 
-  var clickAndTrackHashtag = function (hashtag, userCount, tweetCount, index) {
+  var clickAndTrackHashtag = function (hashtag, last_id, i) {
     if (!authentication.isLoggedIn()) {
       $location.path('/login');
     } else {
       var currentUser = authentication.currentUser()._id;
       var currentHashtag = hashtag;
-      var currentUserCount = userCount;
-      var currentTweetCount = tweetCount;
+      var currentLastTweetId = last_id;
       // make the post request
-      track.trackHashtag(currentHashtag, currentUserCount, currentTweetCount, currentUser);
-      $scope.apps[index].tracked = true;
-      $scope.apps[index].trackButtonText = 'Tracked';
-      $scope.apps[index].isDisabled = true;
+      track.trackHashtag(currentHashtag, currentLastTweetId, currentUser);
+      $scope.apps[i].tracked = true;
+      $scope.apps[i].trackButtonText = 'Tracked';
+      $scope.apps[i].isDisabled = true;
     }
   };
 
@@ -65,22 +71,32 @@ var viewTweets = function(hashtag) {
 
 $scope.processHashTags = function() {
   for (hashtag in $scope.hashtagsToSearch) {
-    var tracked = trackedHashTags.indexOf($scope.hashtagsToSearch[hashtag]) === -1 ? false : true;
+    var latest_id;
+    var trackedHashTagNames = trackedHashTags.map(function(item) { return item.name });
+    var foundTrackedHashTag = trackedHashTagNames.indexOf($scope.hashtagsToSearch[hashtag])
+    if (foundTrackedHashTag === -1) {
+      tracked = false;
+    } else {
+      tracked = true;
+      latest_id = trackedHashTags[foundTrackedHashTag].last_tweet_id
+    }
     var button = tracked ? 'Tracking' : 'Track';
     index = hashtag;
     $scope.apps.push({
       i: index,
       hashtag: $scope.hashtagsToSearch[hashtag],
       tracked: tracked,
-      users: '',
-      tweets: '',
+      users: 0,
+      last_tweet_id: latest_id,
+      tweets: 0,
       ajax: { user: true, tweet: true },
       track: clickAndTrackHashtag,
       viewTweets: viewTweets,
       trackButtonText: button,
       isDisabled: tracked
     });
-    $scope.getDataNoGeo($scope.hashtagsToSearch[hashtag], index, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
+    console.log($scope.apps);
+    $scope.getDataNoGeo($scope.hashtagsToSearch[hashtag], index, latest_id, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
   };
 };
 
@@ -90,14 +106,12 @@ if (authentication.isLoggedIn()) {
   track.getTrackedHashTags(authentication.currentUser()._id, function(error, data) {
     if (error) return error;
     data.data.forEach(function(item) {
-      if (item.tracked) trackedHashTags.push(item.name);
+      if (item.tracked) trackedHashTags.push({ name: item.name, last_tweet_id: item.last_tweet_id });
     });
     $scope.processHashTags();
-    console.log($scope.apps);
   });
 } else {
     $scope.processHashTags();
-    console.log($scope.apps);
 }
 
 

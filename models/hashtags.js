@@ -3,9 +3,8 @@ var mongoose = require('mongoose');
 var HashtagSchema = mongoose.Schema({
 	name: String,
 	user: {type: mongoose.Schema.ObjectId, ref: 'User'},
+	last_tweet_id: Number,
 	tracked: Boolean,
-	user_count: Number,
-	tweet_count: Number,
 	created_at: { type: Date, "default": new Date() }
 });
 
