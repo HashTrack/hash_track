@@ -10,10 +10,11 @@ hashTrack.controller('ResultsController', ['$scope', '$location', 'authenticatio
     $scope.hashtagData = {};
     searchNoGeo.getTweets(hashtag, since)
       .success(function(data) {
+        console.log('raw count from Twitter for: ' + hashtag + ' is ' + data.tweets.length);
         callback_1(data, index);
         callback_2(data, index);
         if (data.tweets.length === 100) {
-          console.log('executing additional calls to Twitter...');
+          console.log('executing additional calls to Twitter for ' + hashtag);
           $scope.getDataNoGeo(hashtag, index, data.highest_id, callback_1, callback_2);
         }
       })
