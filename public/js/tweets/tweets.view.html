@@ -1,7 +1,7 @@
 <div id="tweets">
 			<div class="row">
 		  			<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-						<ui-gmap-marker idKey='app.id' options='app.mapOptions' coords='app.geolocation' ng-repeat="app in apps"></ui-gmap-marker>
+						<ui-gmap-markers options='markerOptions' coords="'coords'" models="markerData"></ui-gmap-markers>
 		  			</ui-gmap-google-map>
 			</div>
 			<div class="row loading-alert" >

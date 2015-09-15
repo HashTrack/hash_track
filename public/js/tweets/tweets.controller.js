@@ -3,6 +3,7 @@ $scope.hashtag = $routeParams.h;
 $scope.since = $routeParams.s;
 
 $scope.apps = [];
+$scope.markerData = [];
 
 var mapDigest = function (callback) {
 	console.log('before digest');
@@ -37,7 +38,6 @@ var mapRender = function (callback){
 						longitude: tweet.coordinates.coordinates[0]
 					};
 					ret.created_at = Date.parse(tweet.created_at);
-					ret.mapOptions = {icon:'/images/tweet_icon.png'};
 					ret.text = tweet.text;
 					ret.id = i;
 					i++;
@@ -45,26 +45,38 @@ var mapRender = function (callback){
 					return ret;
 				}
 			});
-			newData = searchgeo.clean(newData, undefined);
-			$scope.apps = $scope.apps.concat(newData);
-			console.log($scope.apps);
-			mapRender(function (mapOptions) {
-				$scope.map = mapOptions;
-				mapDigest(function() {
-					$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
-					if ($scope.apps.length === 0){
-						$window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
-					};
-				});
-
+			var j = 1;
+			var markerData = data.tweets.map(function(marker) {
+				var ret = {};
+				if (marker.coordinates != null) {
+					ret.title = marker.text;
+					ret.coords = {};
+					ret.coords.latitude = marker.coordinates.coordinates[1];
+					ret.coords.longitude = marker.coordinates.coordinates[0];
+					ret.id = j;
+					j++;
+					return ret;
+				}
 			});
+			newData = searchgeo.clean(newData, undefined);
+			$scope.markerOptions = { icon: '/images/tweet_icon.png' };	
+			markerData = searchgeo.clean(markerData, undefined);
+			$scope.apps = $scope.apps.concat(newData);
+			$scope.markerData = $scope.markerData.concat(markerData);
+			if ($scope.apps.length === 0) $window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
 			if (data.tweets.length === 100) {
+				console.log('running additional api calls to twitter for more recent markers');
 				doGetLocalTweets(data.highest_id);
-			} else {
-				$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
-			}
+			} 
 		}, since);
 		return true;
 	};
 	doGetLocalTweets();
+	mapRender(function (mapOptions) {
+		$scope.map = mapOptions;
+		mapDigest(function() {
+			$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
+			$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+		});
+	});
 }]);
