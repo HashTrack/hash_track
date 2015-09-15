@@ -1,11 +1,9 @@
 hashTrack.controller('SearchController', ['$scope', '$location', function($scope, $location) {
+  // john, gene ralph,peter ronald
 
   $scope.searchHashtag = function(hashtags) {
-  	var hashtagsArray = hashtags.split(',');
-  	var cleanHashTags = [];
-  	hashtagsArray.forEach(function(item) {
-  		cleanHashTags.push(item.replace(/ /g, ''));
-  	});
+  	var clean = hashtags.replace(/[\s,]+/g, ',');
+    cleanHashTags = clean.split(',');
   	
   	$location.search({q: cleanHashTags});
   	$location.path('/results');
