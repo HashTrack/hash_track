@@ -1,5 +1,6 @@
 hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', 'geo', 'searchgeo', function($scope, $window, $routeParams, geo, searchgeo) {
 $scope.hashtag = $routeParams.h;
+$scope.since = $routeParams.s;
 
 $scope.apps = [];
 
@@ -56,7 +57,7 @@ var mapRender = function (callback){
 				});
 
 			});
-			if (data.tweets.length > 1) { 
+			if (data.tweets.length === 100) { 
 				doGetLocalTweets(data.highest_id);
 			} else {
 				$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';

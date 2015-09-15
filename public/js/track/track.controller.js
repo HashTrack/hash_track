@@ -16,8 +16,8 @@ track.getTrackedHashTags(authentication.currentUser()._id, function(error, data)
   $scope.processHashTags(data.data);
 });
 
-var viewTweets = function(hashtag) {
-  $location.search({h: hashtag});
+var viewTweets = function(hashtag, since) {
+  $location.search({h: hashtag, s: since});
   $location.path('/tweets');
 }
 
