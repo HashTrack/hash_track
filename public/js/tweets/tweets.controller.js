@@ -50,6 +50,7 @@ var mapRender = function (callback){
 				var ret = {};
 				if (marker.coordinates != null) {
 					ret.title = marker.text;
+					ret.date = marker.created_at;
 					ret.coords = {};
 					ret.coords.latitude = marker.coordinates.coordinates[1];
 					ret.coords.longitude = marker.coordinates.coordinates[0];
@@ -59,10 +60,24 @@ var mapRender = function (callback){
 				}
 			});
 			newData = searchgeo.clean(newData, undefined);
-			$scope.markerOptions = { icon: '/images/tweet_icon.png' };	
+			$scope.markerOptions = { icon: '/images/tweet_icon.png' };
+			$scope.markerEvents = {
+				click: function(marker, eventName, model, args) {
+					console.log('---------------tweet clicked----------------');
+					console.log(model.title);
+					$scope.tweet = {};
+					$scope.tweet.text = model.title;
+					$scope.tweet.date = model.date;
+					$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+				}
+			}
 			markerData = searchgeo.clean(markerData, undefined);
+			
 			$scope.apps = $scope.apps.concat(newData);
 			$scope.markerData = $scope.markerData.concat(markerData);
+
+
+
 			if ($scope.apps.length === 0) $window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
 			if (data.tweets.length === 100) {
 				console.log('running additional api calls to twitter for more recent markers');
@@ -76,7 +91,6 @@ var mapRender = function (callback){
 		$scope.map = mapOptions;
 		mapDigest(function() {
 			$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
-			$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
 		});
 	});
 }]);
