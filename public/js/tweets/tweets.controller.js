@@ -47,6 +47,7 @@ var mapRender = function (callback){
 			});
 			newData = searchgeo.clean(newData, undefined);
 			$scope.apps = $scope.apps.concat(newData);
+			console.log($scope.apps);
 			mapRender(function (mapOptions) {
 				$scope.map = mapOptions;
 				mapDigest(function() {
@@ -57,7 +58,7 @@ var mapRender = function (callback){
 				});
 
 			});
-			if (data.tweets.length === 100) { 
+			if (data.tweets.length === 100) {
 				doGetLocalTweets(data.highest_id);
 			} else {
 				$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
