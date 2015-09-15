@@ -69,6 +69,7 @@ $scope.processHashTags = function(hashtags) {
     index = hashtag;
     $scope.apps.push({
       hashtag: hashtags[hashtag].name,
+      hashtagId: hashtags[hashtag]._id,
       index: index,
       users: 0,
       tweets: 0,
@@ -85,7 +86,13 @@ $scope.processHashTags = function(hashtags) {
 };
 
 var unTrack = function (index) {
-
+  console.log(index);
+  console.log($scope.apps[index]);
+  $scope.apps[index].tracked = false;
+  track.unTrack($scope.apps[index].hashtagId, function (error, data) {
+    if (error) return error;
+    console.log(data.name+ ' has been updated.');
+  });
 };
 
 $scope.clickAndTrackHashtag = function (hashtag, latest_id, i) {

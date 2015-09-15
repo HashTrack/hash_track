@@ -29,16 +29,28 @@ hashTrack.factory('track', ['$http', 'authentication', function($http, authentic
     $http.get('/api/hashtags/user/' + userId)
     .error(function(error) {
       callback(error, null);
-    })    
+    })
     .then(function(data) {
       console.log('Got the tags, calling back to controller')
       callback(null, data);
     });
   }
 
+  var unTrack = function(hashtagId, callback) {
+    $http.put('/api/hashtags/'+ hashtagId, {
+      tracked: false,
+    }).error(function (error) {
+      console.log(error);
+      callback(error, null);
+    }).success(function (data) {
+      console.log(data);
+      callback(null, data);
+    });
+  };
   return {
     trackHashtag: trackHashtag,
-    getTrackedHashTags: getTrackedHashTags
+    getTrackedHashTags: getTrackedHashTags,
+    unTrack: unTrack
   };
 
 }]);
