@@ -106,7 +106,7 @@ var trackedHashTags = [];
 if (authentication.isLoggedIn()) {
   track.getTrackedHashTags(authentication.currentUser()._id, function(error, data) {
     if (error) return error;
-    data.data.forEach(function(item) {
+    data.forEach(function(item) {
       if (item.tracked) trackedHashTags.push({ name: item.name, last_tweet_id: item.last_tweet_id });
     });
     $scope.processHashTags();

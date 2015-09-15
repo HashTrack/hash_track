@@ -7,13 +7,13 @@ $scope.apps = [];
 
 track.getTrackedHashTags(authentication.currentUser()._id, function(error, data) {
   if (error) return error;
-  if (data.data.length === 0) {
+  if (data.length === 0) {
     $scope.message = 'You do not have any tracked hashtags'
   } else {
     $scope.message = '';
   }
   $scope.hashTagsToSearch = [];
-  $scope.processHashTags(data.data);
+  $scope.processHashTags(data);
 });
 
 var viewTweets = function(hashtag, since) {
@@ -81,6 +81,7 @@ $scope.processHashTags = function(hashtags) {
       viewTweets: viewTweets,
       message: ''
     });
+    console.log($scope.apps);
     $scope.getDataNoGeo(hashtags[hashtag].name, index, hashtags[hashtag].last_tweet_id, $scope.grabUniqueTweets, $scope.grabUniqueUsers);
   };
 };

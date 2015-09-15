@@ -32,7 +32,14 @@ hashTrack.factory('track', ['$http', 'authentication', function($http, authentic
     })
     .then(function(data) {
       console.log('Got the tags, calling back to controller')
-      callback(null, data);
+      returnArray = [];
+      console.log(data);
+      data.data.forEach(function (item) {
+        if (item.tracked === true) {
+          returnArray.push(item)
+        }
+      })
+      callback(null, returnArray);
     });
   }
 
