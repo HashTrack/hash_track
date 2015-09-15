@@ -68,15 +68,13 @@ var mapRender = function (callback){
 					$scope.tweet = {};
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
-					$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+					$scope.showPanel();
 				}
 			}
 			markerData = searchgeo.clean(markerData, undefined);
 			
 			$scope.apps = $scope.apps.concat(newData);
 			$scope.markerData = $scope.markerData.concat(markerData);
-
-
 
 			if ($scope.apps.length === 0) $window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
 			if (data.tweets.length === 100) {
@@ -93,4 +91,14 @@ var mapRender = function (callback){
 			$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
 		});
 	});
+
+	$scope.clearPanel = function() {
+		console.log('the x was clicked');
+		$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list hidden';
+	}
+
+	$scope.showPanel = function() {
+		console.log('the x was clicked');
+		$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+	}
 }]);
