@@ -1,4 +1,18 @@
 /* GLOBAL STYLES  */
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
 html,body, #map_canvas {
 	margin: 0;
 	padding: 0;
@@ -203,6 +217,12 @@ section.panel {
 	}
 }
 
+.fade {
+    -webkit-transition: opacity 0.4s; /* For Safari 3.1 to 6.0 */
+    transition: opacity 0.4s;
+    opacity: 0;
+}
+
 /* MAP / TWEETS STYLES */
 #map_canvas {
     position: relative;
@@ -256,8 +276,11 @@ section.panel {
 
 .tweet-item {
 	list-style: none;
+	display: inline-block;
 	margin: 0;
+	width: 83%;
 	padding: 0;
+	float: right;
 }
 
 .tweet-date {
@@ -271,4 +294,9 @@ section.panel {
 .tweet-panel-head span {
 	float: right;
 	font-weight: 100;
+}
+
+.twitter-user {
+	border-radius: 100%;
+	float: left;
 }

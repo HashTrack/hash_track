@@ -27,7 +27,7 @@ var mapRender = function (callback){
 };
 
 	var doGetLocalTweets = function(since) {
-		searchgeo.getGeoTweets($scope.hashtag, 160, function(error, data) {
+		searchgeo.getGeoTweets($scope.hashtag, 3000, function(error, data) {
 			if (error) return error;
 			var i = 1;
 			var newData = data.tweets.map(function(tweet) {
@@ -49,11 +49,14 @@ var mapRender = function (callback){
 			var markerData = data.tweets.map(function(marker) {
 				var ret = {};
 				if (marker.coordinates != null) {
+					ret.user = {};
 					ret.title = marker.text;
-					ret.date = marker.created_at;
+					ret.date = Date.parse(marker.created_at);
 					ret.coords = {};
 					ret.coords.latitude = marker.coordinates.coordinates[1];
 					ret.coords.longitude = marker.coordinates.coordinates[0];
+					ret.user.profile_image = marker.user.profile_image_url;
+					ret.user.screen_name = marker.user.screen_name
 					ret.id = j;
 					j++;
 					return ret;
@@ -66,6 +69,10 @@ var mapRender = function (callback){
 					console.log('---------------tweet clicked----------------');
 					console.log(model.title);
 					$scope.tweet = {};
+					$scope.tweet.user = {};
+					$scope.tweet.user.profile_image = model.user.profile_image;
+					$scope.tweet.user.screen_name = model.user.screen_name;
+					console.log($scope.tweet.user.profile_image);
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
 					$scope.showPanel();
