@@ -17,9 +17,13 @@ var mapDigest = function (callback) {
 var generateLinks = function(tweet) {
 	var links = tweet.match(/https?:\/\/\S+/g);
 	var newTweet;
-	links.forEach(function(item) {
-		newTweet = tweet.replace(item, '<a href="' + item + '" target="_blank">' + item + '</a>');
-	});
+	if (links) {	
+		links.forEach(function(item) {
+			newTweet = tweet.replace(item, '<a href="' + item + '" target="_blank">' + item + '</a>');
+		});
+	} else {
+		newTweet = tweet;
+	}
 	return newTweet;
 }
 
