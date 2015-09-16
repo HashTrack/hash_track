@@ -111,4 +111,9 @@ var mapRender = function (callback){
 		console.log('the x was clicked');
 		$window.document.getElementsByClassName(panelClass)[0].className = panelClass;
 	}
+
+	$scope.toggleTweetPanel = function() {
+		$scope.hideTweetPanel = !$scope.hideTweetPanel;
+	}
+
 }]);
