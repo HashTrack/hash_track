@@ -4,6 +4,8 @@ $scope.since = $routeParams.s;
 
 $scope.apps = [];
 $scope.markerData = [];
+$scope.hideNoTweets = true;
+$scope.hideTweetPanel = true;
 
 var mapDigest = function (callback) {
 	console.log('before digest');
@@ -27,7 +29,7 @@ var mapRender = function (callback){
 };
 
 	var doGetLocalTweets = function(since) {
-		searchgeo.getGeoTweets($scope.hashtag, 3000, function(error, data) {
+		searchgeo.getGeoTweets($scope.hashtag, 300, function(error, data) {
 			if (error) return error;
 			var i = 1;
 			var newData = data.tweets.map(function(tweet) {
@@ -75,7 +77,8 @@ var mapRender = function (callback){
 					console.log($scope.tweet.user.profile_image);
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
-					$scope.showPanel();
+					$scope.hideTweetPanel = false;
+					
 				}
 			}
 			markerData = searchgeo.clean(markerData, undefined);
@@ -83,7 +86,7 @@ var mapRender = function (callback){
 			$scope.apps = $scope.apps.concat(newData);
 			$scope.markerData = $scope.markerData.concat(markerData);
 
-			if ($scope.apps.length === 0) $window.document.getElementsByClassName("no-hashtags")[0].className = 'no-hashtags';
+			if ($scope.apps.length === 0) $scope.hideNoTweets = false;
 			if (data.tweets.length === 100) {
 				console.log('running additional api calls to twitter for more recent markers');
 				doGetLocalTweets(data.highest_id);
@@ -95,17 +98,17 @@ var mapRender = function (callback){
 	mapRender(function (mapOptions) {
 		$scope.map = mapOptions;
 		mapDigest(function() {
-			$window.document.getElementsByClassName("loading-alert")[0].className = 'loading-alert hidden';
+			$scope.clearPanel('loading-alert');
 		});
 	});
 
-	$scope.clearPanel = function() {
+	$scope.clearPanel = function(panelClass) {
 		console.log('the x was clicked');
-		$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list hidden';
+		$window.document.getElementsByClassName(panelClass)[0].className = panelClass + ' hidden';
 	}
 
-	$scope.showPanel = function() {
+	$scope.showPanel = function(panelClass) {
 		console.log('the x was clicked');
-		$window.document.getElementsByClassName("tweet-list")[0].className = 'tweet-list';
+		$window.document.getElementsByClassName(panelClass)[0].className = panelClass;
 	}
 }]);
