@@ -13,18 +13,6 @@
 .clearfix { display: block; }
 /* close commented backslash hack */
 
-textarea:focus,
-input[type="text"]:focus {
-  border-color: rgba(82, 168, 236, 0.8);
-  outline: 0;
-  outline: thin dotted \9;
-  /* IE6-9 */
-
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
-  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
-}
-
 html,body, #map_canvas {
 	margin: 0;
 	padding: 0;
@@ -116,8 +104,8 @@ footer {
 		font-size: 4rem;
 		font-weight: 100;
 		border-left: 0;
-		border-radius: 0px 0px 0px 0px;
 		box-shadow: none;
+		border-radius: 0px 0px 0px 0px;
 		height: 6rem;
 		@media(max-width: 400px) {
 			font-size: 2.6rem;
@@ -139,17 +127,23 @@ footer {
 		position: absolute;
 		left: -2.2rem;
 		z-index: 5;
-		border-right: 0;
 		box-shadow: none;
+		border-right: 0;
 		background:white;
-		outline: none;
 		@media (max-width: 991px) {
 			margin-left: 2rem;
 		}
 		@media(max-width: 400px) {
 			font-size: 2.6rem;
 		}
-		
+	}
+	input.search-box:focus {
+		box-shadow: none;
+		border-color: rgb(204,204,204,1);
+	}
+	input.static:focus {
+		box-shadow: none;
+		border-color: rgb(204,204,204,1);
 	}
 	span button {
 		height: 6rem;
@@ -173,6 +167,7 @@ footer {
 		padding-bottom: 3rem;
 		input, select {
 			height: 6rem;
+			box-shadow: none;
 			font-size: 4rem;
 			font-weight: 100;
 			width: 25rem;
@@ -181,6 +176,7 @@ footer {
 			}
 		}
 		select {
+			box-shadow: none;
 			width: 20rem;
 			@media (max-width: 1085px) {
 				width: 100%;

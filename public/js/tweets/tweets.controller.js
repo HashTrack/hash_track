@@ -1,4 +1,4 @@
-hashTrack.controller('TweetsController', ['$scope', '$window', '$routeParams', 'geo', 'searchgeo', function($scope, $window, $routeParams, geo, searchgeo) {
+hashTrack.controller('TweetsController', ['$scope', '$sce', '$window', '$routeParams', 'geo', 'searchgeo', function($scope, $sce, $window, $routeParams, geo, searchgeo) {
 $scope.hashtag = $routeParams.h;
 $scope.since = $routeParams.s;
 
@@ -12,6 +12,15 @@ var mapDigest = function (callback) {
 	$scope.$digest();
 	console.log('after digest');
 	callback();
+}
+
+var generateLinks = function(tweet) {
+	var links = tweet.match(/https?:\/\/\S+/g);
+	var newTweet;
+	links.forEach(function(item) {
+		newTweet = tweet.replace(item, '<a href="' + item + '" target="_blank">' + item + '</a>');
+	});
+	return newTweet;
 }
 
 var mapRender = function (callback){
@@ -52,7 +61,7 @@ var mapRender = function (callback){
 				var ret = {};
 				if (marker.coordinates != null) {
 					ret.user = {};
-					ret.title = marker.text;
+					ret.title = $sce.trustAsHtml(generateLinks(marker.text));
 					ret.date = Date.parse(marker.created_at);
 					ret.coords = {};
 					ret.coords.latitude = marker.coordinates.coordinates[1];

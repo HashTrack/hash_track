@@ -2,7 +2,7 @@
 	<h4>{{info.user.screen_name}}</h4>
 	<img class="twitter-user" ng-src="{{info.user.profile_image}}" alt="tweet user image">
 	<ul class="tweet-item">
-		<li class="tweet-text"><i class="fa fa-twitter tweet-icon"></i>{{ info.text }}</li>
+		<li ng-bind-html="info.text" class="tweet-text"><i class="fa fa-twitter tweet-icon"></i></li>
 		<li class="tweet-date">{{ info.date | date : 'M/d/yyyy h:ma' : -0600 }} CT</li>
 	</ul>
 </div>

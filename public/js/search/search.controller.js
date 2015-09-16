@@ -8,4 +8,9 @@ hashTrack.controller('SearchController', ['$scope', '$location', function($scope
   	$location.search({q: cleanHashTags});
   	$location.path('/results');
   };
+
+  $scope.setSearchFocus = function(className) {
+  	document.getElementById(className).focus();
+  }
+
 }]);
