@@ -93,7 +93,7 @@ var unTrack = function (index) {
   $timeout(function(){
       $scope.apps[index].tracked = false;
       $scope.apps[index].startFade = false;
-  }, 400);
+  }, 300);
   track.unTrack($scope.apps[index].hashtagId, function (error, data) {
     if (error) return error;
     console.log(data.name + ' has been updated.');
