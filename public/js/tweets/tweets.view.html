@@ -1,7 +1,7 @@
 <div id="tweets">
 			<div class="row">
 		  			<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-						<ui-gmap-markers options='markerOptions' coords="'coords'" models="markerData" events="markerEvents"></ui-gmap-markers>
+						<ui-gmap-markers icon="'icon'" coords="'coords'" models="markerData" events="markerEvents"></ui-gmap-markers>
 		  			</ui-gmap-google-map>
 			</div>
 			<div class="row loading-alert" >
@@ -16,10 +16,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="row tweet-list hidden">
-				<div class="col-xs-11 col-sm-11 col-md-4 col-lg-3 col-md-offset-7 col-lg-offset-8">
+			<div class="row tweet-list" ng-class="{hidden: hideTweetPanel}">
+				<div class="col-xs-11 col-sm-11 col-xs-offset-0 col-sm-offset-0 col-md-5 col-lg-4 col-md-offset-6 col-lg-offset-6">
 					<div class="panel panel-default tweet-panel">
-						<div class="panel-heading tweet-panel-head">#{{ hashtag }} <span ng-click="clearPanel()">&times;</span> </div>
+						<div class="panel-heading tweet-panel-head">#{{ hashtag }} <span ng-class="{hidden: hideTweetPanel}" ng-click="toggleTweetPanel()">&times;</span> </div>
 						<div class="panel-body tweet-panel-body">
 							<div class="no-hashtags hidden">
 								<h1>Sorry, no tweets found :(</h1>
@@ -31,7 +31,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="tweet-pop">
-				<article class="tweet-float">{{pop_tweet}}</article>
+			<div class="row no-tweets" ng-class="{hidden: hideNoTweets}">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+					<div class="panel panel-default">
+						<div class="panel-body tweet-panel-body">
+							<div class="no-hashtags">
+								<h1>Sorry, no tweets found for current location :(</h1>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 </div>

@@ -1,4 +1,4 @@
-hashTrack.controller('TrackController', ['$scope', '$http', 'track', 'searchNoGeo', 'authentication', '$location', function($scope, $http, track, searchNoGeo, authentication, $location) {
+hashTrack.controller('TrackController', ['$scope', '$timeout', '$http', 'track', 'searchNoGeo', 'authentication', '$location', function($scope, $timeout, $http, track, searchNoGeo, authentication, $location) {
 
 if (!authentication.isLoggedIn()) {
   $location.path('/login')
@@ -89,10 +89,14 @@ $scope.processHashTags = function(hashtags) {
 var unTrack = function (index) {
   console.log(index);
   console.log($scope.apps[index]);
-  $scope.apps[index].tracked = false;
+  $scope.apps[index].startFade = true;
+  $timeout(function(){
+      $scope.apps[index].tracked = false;
+      $scope.apps[index].startFade = false;
+  }, 300);
   track.unTrack($scope.apps[index].hashtagId, function (error, data) {
     if (error) return error;
-    console.log(data.name+ ' has been updated.');
+    console.log(data.name + ' has been updated.');
   });
 };
 

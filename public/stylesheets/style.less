@@ -1,4 +1,18 @@
 /* GLOBAL STYLES  */
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
 html,body, #map_canvas {
 	margin: 0;
 	padding: 0;
@@ -71,6 +85,9 @@ footer {
 			margin-right: 0.3rem;
 		}
 	}
+	i:hover {
+		color: rgb(107, 107, 107);
+	}
 }
 
 /* SEARCH STYLES */
@@ -82,13 +99,51 @@ footer {
 		padding-top: 3rem;
 		padding-bottom: 3rem;
 	}
-	input {
+	input.search-box {
+		padding-left: 0.8rem;
 		font-size: 4rem;
 		font-weight: 100;
+		border-left: 0;
+		box-shadow: none;
+		border-radius: 0px 0px 0px 0px;
 		height: 6rem;
 		@media(max-width: 400px) {
 			font-size: 2.6rem;
 		}
+		@media(max-width: 991px) {
+			margin-left: 2rem;
+		}
+	}
+
+	input.static-hash {
+		padding: 0.5rem;
+		padding-right: 0;
+		font-size: 3.6rem;
+		font-weight: 300;
+		font-family: 'Work Sans', sans-serif;
+		color: #898B8E;
+		width: 2.7rem;
+		height: 6rem;
+		position: absolute;
+		left: -2.2rem;
+		z-index: 5;
+		box-shadow: none;
+		border-right: 0;
+		background:white;
+		@media (max-width: 991px) {
+			margin-left: 2rem;
+		}
+		@media(max-width: 400px) {
+			font-size: 2.6rem;
+		}
+	}
+	input.search-box:focus {
+		box-shadow: none;
+		border-color: rgb(204,204,204,1);
+	}
+	input.static:focus {
+		box-shadow: none;
+		border-color: rgb(204,204,204,1);
 	}
 	span button {
 		height: 6rem;
@@ -112,6 +167,7 @@ footer {
 		padding-bottom: 3rem;
 		input, select {
 			height: 6rem;
+			box-shadow: none;
 			font-size: 4rem;
 			font-weight: 100;
 			width: 25rem;
@@ -120,6 +176,7 @@ footer {
 			}
 		}
 		select {
+			box-shadow: none;
 			width: 20rem;
 			@media (max-width: 1085px) {
 				width: 100%;
@@ -203,6 +260,17 @@ section.panel {
 	}
 }
 
+#tracked-hashtag {
+	height: 12rem;
+}
+
+.fade {
+    -webkit-transition: opacity height 0.3s; /* For Safari 3.1 to 6.0 */
+    transition: opacity height 0.3s;
+    height: 0;
+    opacity: 0;
+}
+
 /* MAP / TWEETS STYLES */
 #map_canvas {
     position: relative;
@@ -238,10 +306,10 @@ section.panel {
 }
 
 
-.tweet-panel {
+.tweet-panel, .no-tweets {
 	position: absolute;
 	width: 100%;
-	top: 15rem;
+	top: 45rem;
 	z-index: 2;
 	.tweet-panel-head {
 		font-family: 'Work Sans', sans-serif;
@@ -256,8 +324,11 @@ section.panel {
 
 .tweet-item {
 	list-style: none;
-	margin: 0;
+	display: inline-block;
+	margin-left: 1rem;
+	width: 80%;
 	padding: 0;
+	float: left;
 }
 
 .tweet-date {
@@ -270,5 +341,12 @@ section.panel {
 
 .tweet-panel-head span {
 	float: right;
-	font-weight: 100;
+	font-weight: 300;
+	color: #8B8D90;
+
+}
+
+.twitter-user {
+	border-radius: 100%;
+	float: left;
 }

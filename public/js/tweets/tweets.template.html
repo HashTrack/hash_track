@@ -1,9 +1,8 @@
-<div id="tweet">
+<div id="tweet clearfix">
+	<h4>{{info.user.screen_name}}</h4>
+	<img class="twitter-user" ng-src="{{info.user.profile_image}}" alt="tweet user image">
 	<ul class="tweet-item">
-		<li class="tweet-text"><i class="fa fa-twitter tweet-icon"></i>
-		<li class="tweet-user">{{ tweet.user }}</li>
-		<li>{{ info.text }}</li>
-		<li class="tweet-date">{{ info.date | date : 'M/d/yy h:mm a' : '-0500' }}</li>
+		<li ng-bind-html="info.text" class="tweet-text"><i class="fa fa-twitter tweet-icon"></i></li>
+		<li class="tweet-date">{{ info.date | date : 'M/d/yyyy h:ma' : -0600 }} CT</li>
 	</ul>
 </div>
-<hr>
