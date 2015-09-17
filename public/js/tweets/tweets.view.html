@@ -1,7 +1,7 @@
 <div id="tweets">
 			<div class="row">
 		  			<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-						<ui-gmap-markers options='markerOptions' coords="'coords'" models="markerData" events="markerEvents"></ui-gmap-markers>
+						<ui-gmap-markers icon="'icon'" coords="'coords'" models="markerData" events="markerEvents"></ui-gmap-markers>
 		  			</ui-gmap-google-map>
 			</div>
 			<div class="row loading-alert" >
@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="row tweet-list" ng-class="{hidden: hideTweetPanel}">
-				<div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 col-md-5 col-lg-4 col-md-offset-6 col-lg-offset-7">
+				<div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 col-md-5 col-lg-4 col-md-offset-5 col-lg-offset-6">
 					<div class="panel panel-default tweet-panel">
 						<div class="panel-heading tweet-panel-head">#{{ hashtag }} <span ng-class="{hidden: hideTweetPanel}" ng-click="toggleTweetPanel()">&times;</span> </div>
 						<div class="panel-body tweet-panel-body">

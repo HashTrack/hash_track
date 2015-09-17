@@ -85,6 +85,7 @@ var mapRenderCurrentLocation = function (callback){
 					realTweet = $sce.trustAsHtml(realTweet);
 					ret.title = realTweet;
 					ret.date = Date.parse(marker.created_at);
+					ret.icon = '/images/tweet_icon.png';
 					ret.coords = {};
 					ret.coords.latitude = marker.coordinates.coordinates[1];
 					ret.coords.longitude = marker.coordinates.coordinates[0];
@@ -96,23 +97,25 @@ var mapRenderCurrentLocation = function (callback){
 				}
 			});
 			newData = searchgeo.clean(newData, undefined);
-			$scope.markerOptions = { icon: '/images/tweet_icon.png' };
 			$scope.markerEvents = {
 				click: function(marker, eventName, model, args) {
-					console.log('---------------tweet clicked----------------');
-					console.log(model.title);
+					console.log('---------------marker clicked----------------');
+					console.log(marker);
 					$scope.tweet = {};
 					$scope.tweet.user = {};
 					$scope.tweet.user.profile_image = model.user.profile_image;
 					$scope.tweet.user.screen_name = model.user.screen_name;
-					
+					$scope.markerData = $scope.markerData.map(function(item) { 
+						item.icon = '/images/tweet_icon.png';
+						return item;
+					});
+					model.icon = '/images/tweet_icon_selected.png';
 					$scope.map.center.latitude = model.coords.latitude; 
 					$scope.map.center.longitude = model.coords.longitude; 
 
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
 					$scope.hideTweetPanel = false;
-					
 				}
 			}
 			markerData = searchgeo.clean(markerData, undefined);
