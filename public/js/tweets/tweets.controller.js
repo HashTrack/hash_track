@@ -27,7 +27,7 @@ var generateLinks = function(tweet) {
 	return newTweet;
 }
 
-var mapRender = function (callback){
+var mapRenderCurrentLocation = function (callback){
 	geo.getUserGeo(function(error, geolocation) {
 		if (error) {
 			geolocation.latitude = 74;
@@ -87,7 +87,10 @@ var mapRender = function (callback){
 					$scope.tweet.user = {};
 					$scope.tweet.user.profile_image = model.user.profile_image;
 					$scope.tweet.user.screen_name = model.user.screen_name;
-					console.log($scope.tweet.user.profile_image);
+					
+					$scope.map.center.latitude = model.coords.latitude; 
+					$scope.map.center.longitude = model.coords.longitude; 
+
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
 					$scope.hideTweetPanel = false;
@@ -108,7 +111,7 @@ var mapRender = function (callback){
 		return true;
 	};
 	doGetLocalTweets();
-	mapRender(function (mapOptions) {
+	mapRenderCurrentLocation(function (mapOptions) {
 		$scope.map = mapOptions;
 		mapDigest(function() {
 			$scope.clearPanel('loading-alert');
