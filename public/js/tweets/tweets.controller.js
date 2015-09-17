@@ -38,10 +38,10 @@ var mapRender = function (callback){
 						longitude: tweet.coordinates.coordinates[0]
 					};
 					ret.created_at = Date.parse(tweet.created_at);
+					ret.user = tweet.user.screen_name
 					ret.text = tweet.text;
 					ret.id = i;
 					i++;
-					console.log(ret);
 					return ret;
 				}
 			});
@@ -50,6 +50,7 @@ var mapRender = function (callback){
 				var ret = {};
 				if (marker.coordinates != null) {
 					ret.title = marker.text;
+					ret.user = marker.user.screen_name;
 					ret.date = marker.created_at;
 					ret.coords = {};
 					ret.coords.latitude = marker.coordinates.coordinates[1];
@@ -65,6 +66,7 @@ var mapRender = function (callback){
 				click: function(marker, eventName, model, args) {
 					console.log('---------------tweet clicked----------------');
 					console.log(model.title);
+					console.log(model);
 					$scope.tweet = {};
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
@@ -72,7 +74,7 @@ var mapRender = function (callback){
 				}
 			}
 			markerData = searchgeo.clean(markerData, undefined);
-			
+
 			$scope.apps = $scope.apps.concat(newData);
 			$scope.markerData = $scope.markerData.concat(markerData);
 
@@ -80,7 +82,7 @@ var mapRender = function (callback){
 			if (data.tweets.length === 100) {
 				console.log('running additional api calls to twitter for more recent markers');
 				doGetLocalTweets(data.highest_id);
-			} 
+			}
 		}, since);
 		return true;
 	};
