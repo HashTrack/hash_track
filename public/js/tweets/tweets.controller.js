@@ -69,10 +69,10 @@ var mapRenderCurrentLocation = function (callback){
 						longitude: tweet.coordinates.coordinates[0]
 					};
 					ret.created_at = Date.parse(tweet.created_at);
-					ret.user = tweet.user.screen_name
 					ret.text = tweet.text;
 					ret.id = i;
 					i++;
+					console.log(ret);
 					return ret;
 				}
 			});
@@ -80,6 +80,7 @@ var mapRenderCurrentLocation = function (callback){
 			var markerData = data.tweets.map(function(marker) {
 				var ret = {};
 				if (marker.coordinates != null) {
+					ret.user = {};
 					var realTweet = generateHashtagLinks(generateLinks(marker.text));
 					realTweet = $sce.trustAsHtml(realTweet);
 					ret.title = realTweet;
@@ -98,9 +99,6 @@ var mapRenderCurrentLocation = function (callback){
 			newData = searchgeo.clean(newData, undefined);
 			$scope.markerEvents = {
 				click: function(marker, eventName, model, args) {
-					console.log('---------------tweet clicked----------------');
-					console.log(model.title);
-					console.log(model);
 					console.log('---------------marker clicked----------------');
 					console.log(marker);
 					$scope.tweet = {};
