@@ -27,6 +27,22 @@ var generateLinks = function(tweet) {
 	return newTweet;
 }
 
+var generateHashtagLinks = function(tweet) {
+	console.log(typeof tweet);
+	var hashtags = tweet.match(/#[a-zA-Z0-9]+/g);
+	var newTweet = tweet;
+	if (hashtags) {
+		hashtags.forEach(function(hashtag) {
+			var originalHashtag = hashtag;
+			var tagname = hashtag.slice(1, hashtag.length);
+			newTweet = newTweet.replace(originalHashtag, '<a href="/#/results?q=' + tagname + '">' + originalHashtag + '</a>');
+		});
+	} else {
+		newTweet = tweet;
+	}
+	return newTweet;
+}
+
 var mapRenderCurrentLocation = function (callback){
 	geo.getUserGeo(function(error, geolocation) {
 		if (error) {
@@ -65,7 +81,9 @@ var mapRenderCurrentLocation = function (callback){
 				var ret = {};
 				if (marker.coordinates != null) {
 					ret.user = {};
-					ret.title = $sce.trustAsHtml(generateLinks(marker.text));
+					var realTweet = generateHashtagLinks(generateLinks(marker.text));
+					realTweet = $sce.trustAsHtml(realTweet);
+					ret.title = realTweet;
 					ret.date = Date.parse(marker.created_at);
 					ret.coords = {};
 					ret.coords.latitude = marker.coordinates.coordinates[1];
