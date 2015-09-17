@@ -17,7 +17,7 @@ var mapDigest = function (callback) {
 var generateLinks = function(tweet) {
 	var links = tweet.match(/https?:\/\/\S+/g);
 	var newTweet;
-	if (links) {	
+	if (links) {
 		links.forEach(function(item) {
 			newTweet = tweet.replace(item, '<a href="' + item + '" target="_blank">' + item + '</a>');
 		});
@@ -105,13 +105,13 @@ var mapRenderCurrentLocation = function (callback){
 					$scope.tweet.user = {};
 					$scope.tweet.user.profile_image = model.user.profile_image;
 					$scope.tweet.user.screen_name = model.user.screen_name;
-					$scope.markerData = $scope.markerData.map(function(item) { 
+					$scope.markerData = $scope.markerData.map(function(item) {
 						item.icon = '/images/tweet_icon.png';
 						return item;
 					});
 					model.icon = '/images/tweet_icon_selected.png';
-					$scope.map.center.latitude = model.coords.latitude; 
-					$scope.map.center.longitude = model.coords.longitude; 
+					$scope.map.center.latitude = model.coords.latitude;
+					$scope.map.center.longitude = model.coords.longitude;
 
 					$scope.tweet.text = model.title;
 					$scope.tweet.date = model.date;
@@ -119,7 +119,7 @@ var mapRenderCurrentLocation = function (callback){
 				}
 			}
 			markerData = searchgeo.clean(markerData, undefined);
-			
+
 			$scope.apps = $scope.apps.concat(newData);
 			$scope.markerData = $scope.markerData.concat(markerData);
 
@@ -127,7 +127,7 @@ var mapRenderCurrentLocation = function (callback){
 			if (data.tweets.length === 100) {
 				console.log('running additional api calls to twitter for more recent markers');
 				doGetLocalTweets(data.highest_id);
-			} 
+			}
 		}, since);
 		return true;
 	};
